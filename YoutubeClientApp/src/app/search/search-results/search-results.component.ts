@@ -1,42 +1,40 @@
-import { Component } from '@angular/core';
-import * as cardsData from "../../assets/response.json"
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Item } from '../../types/response';
-import { differenceInDays } from 'date-fns';
+import { GetBorderColorService } from '../../services/get-border-color.service';
+import { SortByDatePipe } from "../../pipes/sort-by-date.pipe";
+import { FilterPipe } from "../../pipes/filter.pipe";
 
 @Component({
-  selector: 'app-search-results',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './search-results.component.html',
-  styleUrl: './search-results.component.scss',
+    selector: 'app-search-results',
+    standalone: true,
+    templateUrl: './search-results.component.html',
+    styleUrl: './search-results.component.scss',
+    imports: [FormsModule, CommonModule, SortByDatePipe, FilterPipe]
 })
 export class SearchResultsComponent {
+
+  public data:Item[] = inject(GetBorderColorService).generalData;
+
   constructor(private router: Router) {}
-
-  public data:Item[] = cardsData.items;
-
   navigateToRoute(itemData: string) {
     this.router.navigate(['/search-item', itemData])
   }
 
+  public borderService = inject(GetBorderColorService);
   public getColorClass (date: string | undefined): string {
-    const currentDate = new Date();
-    if (date) {
-      const targetDate = new Date(date);
-      const days: number = differenceInDays(currentDate, targetDate);
-      
-      switch(true) {
-        case (days < 7): return "color-blue"; 
-        case (days < 30): return "color-green";
-        case (days < 180): return "color-yellow";
-        case (days >= 180): return "color-red";
-        default: return "color-blue";
-      }
-    } else {
-      return "color-blue";
-    }
+    return this.borderService.getColorClass(date)
   }
+
+
+  public searchTextDer = ""
+
+
+
+
+
+ public isAvailable = true
+ public up = false
 }

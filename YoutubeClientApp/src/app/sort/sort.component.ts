@@ -10,5 +10,5 @@ import { RouterModule } from '@angular/router';
   styleUrl: './sort.component.scss'
 })
 export class SortComponent {
-  public dateColor?: string;
+  
 }

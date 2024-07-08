@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { differenceInDays } from 'date-fns';
+import * as data from '../assets/response.json'
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,18 @@ export class GetBorderColorService {
     } else {
       return "color-blue";
     }
+  }
+
+  public generalData = data.items;
+
+
+  public filterObj (filterText: string | undefined) {
+    if (!filterText) {
+      this.generalData = data.items
+    } else { 
+      this.generalData = data.items.filter(el => el.snippet.title.includes(filterText));
+    }
+    console.log(this.generalData)
+    // console.log(filterText)
   }
 }

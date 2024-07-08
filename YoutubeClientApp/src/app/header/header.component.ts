@@ -13,11 +13,10 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
 
-  public searchingText?: string;
-
   public displaySortCpmponent?: boolean;
-
   toggleSortComponent() {
     this.displaySortCpmponent = !this.displaySortCpmponent;
   }
+
+  public searchingText?: string;
 }

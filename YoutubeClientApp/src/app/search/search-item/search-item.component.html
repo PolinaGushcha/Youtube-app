@@ -8,7 +8,7 @@
       <div>
         <div class="info-title">
           <h2 class="info-h2">{{ data?.snippet?.title }}</h2>
-          <span class="info-publishedAt">{{ myFormattedDate }}</span>
+          <span class="info-publishedAt">{{ data?.snippet?.publishedAt | date: 'full' }}</span>
         </div>
         <div class="description">
           <h3 class="description-title">Description:</h3>

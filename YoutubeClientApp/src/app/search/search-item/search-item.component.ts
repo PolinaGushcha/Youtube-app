@@ -4,7 +4,7 @@ import * as cardsData from "../../assets/response.json"
 import { CommonModule, DatePipe } from '@angular/common';
 import { Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SearchResultsComponent } from '../search-results/search-results.component';
+import { GetBorderColorService } from '../../services/get-border-color.service';
 
 @Component({
   selector: 'app-search-item',
@@ -28,9 +28,14 @@ export class SearchItemComponent {
     this._location.back();
   }
 
-  public getColorClass(date: string | undefined): string {
-    const instanceOfObj = new SearchResultsComponent(this.router);
-    const instanceFunc = instanceOfObj.getColorClass(date)
-    return instanceFunc
+  public borderService = inject(GetBorderColorService);
+  public getColorClass (date: string | undefined): string {
+    return this.borderService.getColorClass(date)
   }
+
+  // public getColorClass(date: string | undefined): string {
+  //   const instanceOfObj = new SearchResultsComponent(this.router);
+  //   const instanceFunc = instanceOfObj.getColorClass(date)
+  //   return instanceFunc
+  // }
 }

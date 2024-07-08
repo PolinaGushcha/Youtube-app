@@ -9,21 +9,6 @@ export const routes: Routes = [
     title: 'Results title'
   },
   {
-    path: 'date',
-    component: SearchResultsComponent,
-    title: 'Results title'
-  },
-  {
-    path: 'count of views',
-    component: SearchResultsComponent,
-    title: 'Results title'
-  },
-  {
-    path: 'by word or sentance',
-    component: SearchResultsComponent,
-    title: 'Results title'
-  },
-  {
     path: 'search-item/:id',
     component: SearchItemComponent,
     title: 'Item title'
