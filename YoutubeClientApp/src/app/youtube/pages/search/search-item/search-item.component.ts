@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as cardsData from "../../assets/response.json"
+import * as cardsData from "../../../../assets/response.json"
 import { CommonModule, DatePipe } from '@angular/common';
 import { Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GetBorderColorService } from '../../services/get-border-color.service';
+import { GetBorderColorService } from '../../../../shared/services/get-border-color.service';
 
 @Component({
   selector: 'app-search-item',

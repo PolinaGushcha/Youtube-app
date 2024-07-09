@@ -11,7 +11,13 @@
             type="text"
             placeholder="What are you want to find out?"
             [(ngModel)]="searchingText" />
-          <button [routerLink]="['/results']" routerLinkActive="active" class="search-button">search</button>
+          <button
+            (click)="getSerchingText()"
+            [routerLink]="['/results']"
+            routerLinkActive="active"
+            class="search-button">
+            search
+          </button>
         </div>
         <button class="settings-button" (click)="toggleSortComponent()">
           <img src="/sort.svg" alt="Settings" />

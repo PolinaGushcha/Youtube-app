@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SortComponent } from '../sort/sort.component';
+import { SortComponent } from '../../sort/sort.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -19,4 +19,10 @@ export class HeaderComponent {
   }
 
   public searchingText?: string;
+  @Input() resultSearchingText?: string;
+  @Output() resultEvent = new EventEmitter()
+
+  public getSerchingText () {
+    return this.resultEvent.emit(this.searchingText)
+  }
 }

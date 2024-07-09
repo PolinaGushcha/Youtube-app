@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./header/header.component";
-import { SearchItemComponent } from './search/search-item/search-item.component';
-import { SearchResultsComponent } from './search/search-results/search-results.component';
+import { HeaderComponent } from './core/header/header.component';
+import { SearchItemComponent } from './youtube/pages/search/search-item/search-item.component';
+import { SearchResultsComponent } from './youtube/pages/search/search-results/search-results.component';
 import {RouterModule} from '@angular/router';
 
 @Component({
@@ -13,5 +13,9 @@ import {RouterModule} from '@angular/router';
     imports: [RouterModule, RouterOutlet, HeaderComponent, SearchResultsComponent, SearchItemComponent]
 })
 export class AppComponent {
+  public messageText?: string;
+  getSerchingText(message: string | undefined) {
+    this.messageText = message
+  }
   title = 'YoutubeClientApp';
 }

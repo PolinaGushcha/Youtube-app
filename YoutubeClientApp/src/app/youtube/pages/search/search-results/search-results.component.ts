@@ -2,10 +2,10 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Item } from '../../types/response';
-import { GetBorderColorService } from '../../services/get-border-color.service';
-import { SortByDatePipe } from "../../pipes/sort-by-date.pipe";
-import { FilterPipe } from "../../pipes/filter.pipe";
+import { Item } from '../../../../types/response';
+import { GetBorderColorService } from '../../../../shared/services/get-border-color.service';
+import { SortByDatePipe } from "../../../../shared/pipes/sort-by-date.pipe";
+import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 
 @Component({
     selector: 'app-search-results',
@@ -28,13 +28,4 @@ export class SearchResultsComponent {
     return this.borderService.getColorClass(date)
   }
 
-
-  public searchTextDer = ""
-
-
-
-
-
- public isAvailable = true
- public up = false
 }

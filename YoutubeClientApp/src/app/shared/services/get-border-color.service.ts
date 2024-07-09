@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { differenceInDays } from 'date-fns';
-import * as data from '../assets/response.json'
+import * as data from '../../assets/response.json'
 
 @Injectable({
   providedIn: 'root'

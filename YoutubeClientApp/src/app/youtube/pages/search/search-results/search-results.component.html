@@ -1,5 +1,5 @@
 <section class="search-results">
-  <div class="card" *ngFor="let card of data | filter: searchTextDer | sortByDate: isAvailable : up">
+  <div class="card" *ngFor="let card of data">
     <div class="card-container" [ngClass]="getColorClass(card.snippet.publishedAt)">
       <img class="card-img" src="{{ card.snippet.thumbnails.medium.url }}" alt="{{ card.id }}" />
       <ul class="card-ul">
