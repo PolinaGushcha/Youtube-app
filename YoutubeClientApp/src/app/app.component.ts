@@ -18,4 +18,6 @@ export class AppComponent {
     this.messageText = message
   }
   title = 'YoutubeClientApp';
+
+  public inputVal = "inputVal"
 }

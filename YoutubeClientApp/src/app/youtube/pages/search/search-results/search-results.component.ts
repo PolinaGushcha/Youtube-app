@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Item } from '../../../../types/response';
-import { GetBorderColorService } from '../../../../shared/services/get-border-color.service';
+import { GetBorderColorService } from '../../../../core/services/get-border-color.service';
 import { SortByDatePipe } from "../../../../shared/pipes/sort-by-date.pipe";
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 
