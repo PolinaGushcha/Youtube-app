@@ -12,7 +12,7 @@
             placeholder="What are you want to find out?"
             [(ngModel)]="searchingText" />
           <button
-            (click)="getSerchingText(searchingText)"
+            (click)="getSearchingText(searchingText)"
             [routerLink]="['/results']"
             routerLinkActive="active"
             class="search-button">
@@ -37,11 +37,32 @@
       <div class="section">
         <p class="sort-text">Sorting by:</p>
         <div class="sort-list">
-          <button (click)="handleSortObj('date')">date</button>
-          <button (click)="handleSortObj('countOfViews')">count of views</button>
-          <button (click)="handleSortObj('byWordOrSentance')">by word or sentance</button>
+          <button
+            [ngStyle]="{ color: upAndDownIsAvaliable === 'date' ? 'red' : '#2F80ED' }"
+            (click)="handleSortObj('date')">
+            date
+          </button>
+          <button
+            [ngStyle]="{ color: upAndDownIsAvaliable === 'date' ? 'red' : '#2F80ED' }"
+            (click)="reverseArrow()"
+            *ngIf="upAndDownIsAvaliable === 'date'">
+            <img [ngClass]="{ arrow: !upAndDown, arrowUp: upAndDown }" src="/arrow.svg" alt="arrow" />
+          </button>
+          <button
+            [ngStyle]="{ color: upAndDownIsAvaliable === 'countOfViews' ? 'red' : '#2F80ED' }"
+            (click)="handleSortObj('countOfViews')">
+            count of views
+          </button>
+          <button (click)="reverseArrow()" *ngIf="upAndDownIsAvaliable === 'countOfViews'">
+            <img [ngClass]="{ arrow: !upAndDown, arrowUp: upAndDown }" class="arrow" src="/arrow.svg" alt="arrow" />
+          </button>
+          <button
+            [ngStyle]="{ color: upAndDownIsAvaliable === 'byWordOrSentance' ? 'red' : '#2F80ED' }"
+            (click)="handleSortObj('byWordOrSentance')">
+            by word or sentance
+          </button>
         </div>
-        <input class="sort-input" type="text" name="" id="" />
+        <input [(ngModel)]="sortingText" class="sort-input" type="text" name="" id="" />
       </div>
     </div>
   </section>

@@ -74,3 +74,35 @@
     }
   }
 }
+
+.aside {
+  background-color: #e5e5e5;
+
+  .section {
+    display: flex;
+    padding-left: 300px;
+    align-items: center;
+    font-size: 12px;
+
+    .sort-text {
+      color: #929292;
+      margin-right: 10px;
+    }
+
+    .sort-input {
+      border: none;
+    }
+  }
+}
+.arrow {
+  width: 12px;
+}
+.arrowUp {
+  width: 12px;
+  transform: rotate(180deg);
+}
+.sort-list button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

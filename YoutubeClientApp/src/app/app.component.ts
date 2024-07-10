@@ -25,10 +25,35 @@ export class AppComponent {
     console.log('filter text: ' + text);
     this.inputVal = text;
   }
+  public sortingVal = "sortingVal"
+  onSortingText (text: string) {
+    console.log('sorting text: ' + text);
+    this.sortingVal = text;
+  }
+
+  public upAndDownArrow = false;
+  onUpAndDown (value: boolean) {
+    this.upAndDownArrow = value
+    switch (true) {
+      case (this.sortType.sortByDate): 
+      this.sortType.dateUp = value;
+      this.sortType.countOfViewsUp = false;
+      break;
+      case (this.sortType.countOfViews): 
+      this.sortType.dateUp = false;
+      this.sortType.countOfViewsUp = value;
+      break;
+      default: 
+      this.sortType.dateUp = false;
+      this.sortType.countOfViewsUp = false;
+      break;
+    }
+    return value
+  }
 
   public sortType: ISortObj  = {
     sortByDate: false,
-    dateUp: false,
+    dateUp: this.upAndDownArrow,
     countOfViews: false,
     countOfViewsUp: false,
     byWordOrSentance: false,
@@ -37,6 +62,7 @@ export class AppComponent {
   onSortObj (str: string) {
     switch (str) {
       case 'date': this.sortType.sortByDate = !this.sortType.sortByDate;
+      this.sortType.dateUp = this.upAndDownArrow
       this.sortType.countOfViews = false;
       this.sortType.byWordOrSentance = false;
       break;
@@ -50,10 +76,8 @@ export class AppComponent {
       this.sortType.countOfViews = false;
       this.sortType.byWordOrSentance = !this.sortType.byWordOrSentance; break;
     }
-
     console.log('obj: ');
     console.log(this.sortType)
-
     return this.sortType
   }
 }

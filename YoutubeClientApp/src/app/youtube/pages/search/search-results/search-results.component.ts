@@ -39,6 +39,8 @@ export class SearchResultsComponent implements OnInit {
     return this.borderService.getColorClass(date)
   }
 
+  @Input() upAndDownArrow = false
+
   @Input() sortType: ISortObj = {
     sortByDate: false,
     dateUp: false,

@@ -1,4 +1,8 @@
-<app-header (shareSearchingText)="onTextSelected($event)" (shareSortObj)="onSortObj($event)"></app-header>
+<app-header
+  (shareSearchingText)="onTextSelected($event)"
+  (shareSortObj)="onSortObj($event)"
+  (shareUpAndDown)="onUpAndDown($event)"
+  (shareSortObj)="onSortingText($event)"></app-header>
 <main></main>
-<app-search-results [inputVal]="inputVal" [sortType]="sortType"></app-search-results>
+<app-search-results [inputVal]="inputVal" [sortType]="sortType" [upAndDownArrow]="upAndDownArrow"></app-search-results>
 <router-outlet />

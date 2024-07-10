@@ -20,18 +20,40 @@ export class HeaderComponent {
 
   public searchingText = "";
   @Output() shareSearchingText = new EventEmitter<string>()
-  public getSerchingText (value: string) {
+  public getSearchingText (value: string) {
     this.shareSearchingText.emit(value)
   }
+
+
+  
+  
+  public sortingText = "";
+  // @Output() shareSortingText = new EventEmitter<string>()
+  // public getSortingText () {
+  //   // this.shareSortingText.emit(this.sortingText)
+  //   console.log('dhdhd')
+  // }
+
+
+
 
   public deleteSearchingText () {
     this.displaySortCpmponent = false;
     this.searchingText = ""
   }
 
+  public upAndDownIsAvaliable = ''
+  public upAndDown = false;
+  @Output() shareUpAndDown = new EventEmitter<boolean>();
+  public reverseArrow () {
+    this.upAndDown = !this.upAndDown;
+    this.shareUpAndDown.emit(this.upAndDown)
+  }
+
   @Output() shareSortObj = new EventEmitter<string>()
   public handleSortObj (value: string) {
-    console.log(value)
+    this.upAndDown = false;
+    this.upAndDownIsAvaliable = this.upAndDownIsAvaliable === value ? '' : value;
     this.shareSortObj.emit(value)
   }
 }
