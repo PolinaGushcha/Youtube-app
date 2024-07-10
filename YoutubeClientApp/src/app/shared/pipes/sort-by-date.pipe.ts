@@ -12,14 +12,15 @@ export class SortByDatePipe implements PipeTransform {
     isAvailable: boolean,
     up: boolean,
   ): Item[] {
+    const copyOfCards: Item[] = [...cards]
     if (isAvailable) {
-      const sortCards = cards.sort(
+      const sortCards = copyOfCards.sort(
         (a, b) =>
           +new Date(a.snippet.publishedAt) - +new Date(b.snippet.publishedAt),
       );
       if (up) return sortCards;
       else return sortCards.reverse();
-    } else return cards;
+    } else return copyOfCards;
   }
 
 }

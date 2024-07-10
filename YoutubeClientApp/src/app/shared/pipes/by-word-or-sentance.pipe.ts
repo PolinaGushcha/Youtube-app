@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Item } from '../types/response';
+import { Item } from '../../types/response';
 
 @Pipe({
   name: 'byWordOrSentance',
@@ -9,13 +9,17 @@ export class ByWordOrSentancePipe implements PipeTransform {
 
   transform(
     cards: Item[],
+    isAvailable: boolean,
     searchText: string,
   ): Item[] {
-    if (searchText) {
-      return cards.filter(item => {
-        return item.snippet.title.includes(searchText);
-      });
-    } else return cards;
+    const copyOfCards: Item[] = [...cards];
+    if (isAvailable) {
+      if (searchText) {
+        return copyOfCards.filter(item => {
+          return item.snippet.title.includes(searchText);
+        });
+      } else return copyOfCards;
+    } else return copyOfCards;
   }
 
 }

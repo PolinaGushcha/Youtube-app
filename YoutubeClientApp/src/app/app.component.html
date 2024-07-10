@@ -1,2 +1,4 @@
-<app-header inputVal></app-header>
+<app-header (shareSearchingText)="onTextSelected($event)" (shareSortObj)="onSortObj($event)"></app-header>
+<main></main>
+<app-search-results [inputVal]="inputVal" [sortType]="sortType"></app-search-results>
 <router-outlet />

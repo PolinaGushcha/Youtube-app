@@ -1,30 +1,37 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SortComponent } from '../../sort/sort.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule, CommonModule, SortComponent, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
 
   public displaySortCpmponent?: boolean;
-  toggleSortComponent() {
+  public toggleSortComponent () {
     this.displaySortCpmponent = !this.displaySortCpmponent;
   }
 
-  public searchingText?: string;
-
-  public getSerchingText () {
-    return ""
+  public searchingText = "";
+  @Output() shareSearchingText = new EventEmitter<string>()
+  public getSerchingText (value: string) {
+    this.shareSearchingText.emit(value)
   }
 
+  public deleteSearchingText () {
+    this.displaySortCpmponent = false;
+    this.searchingText = ""
+  }
 
-
-  @Input() inputVal = "hello";
+  @Output() shareSortObj = new EventEmitter<string>()
+  public handleSortObj (value: string) {
+    console.log(value)
+    this.shareSortObj.emit(value)
+  }
 }

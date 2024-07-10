@@ -2,7 +2,7 @@
   <div class="container">
     <nav class="nav">
       <div class="search-container">
-        <button [routerLink]="['/']" routerLinkActive="active" class="logo-button">
+        <button (click)="deleteSearchingText()" [routerLink]="['/']" routerLinkActive="active" class="logo-button">
           <img src="/logo.svg" alt="Logo" />
         </button>
         <div class="search-bar">
@@ -12,7 +12,7 @@
             placeholder="What are you want to find out?"
             [(ngModel)]="searchingText" />
           <button
-            (click)="getSerchingText()"
+            (click)="getSerchingText(searchingText)"
             [routerLink]="['/results']"
             routerLinkActive="active"
             class="search-button">
@@ -24,7 +24,7 @@
         </button>
       </div>
       <div class="user-info">
-        <p>{{ inputVal }}</p>
+        <p>Your Name</p>
         <img src="/user.svg" alt="User Icon" class="user-icon" />
       </div>
     </nav>
@@ -32,5 +32,17 @@
 </header>
 
 <div *ngIf="displaySortCpmponent" class="text-block">
-  <app-sort></app-sort>
+  <section class="aside">
+    <div class="container">
+      <div class="section">
+        <p class="sort-text">Sorting by:</p>
+        <div class="sort-list">
+          <button (click)="handleSortObj('date')">date</button>
+          <button (click)="handleSortObj('countOfViews')">count of views</button>
+          <button (click)="handleSortObj('byWordOrSentance')">by word or sentance</button>
+        </div>
+        <input class="sort-input" type="text" name="" id="" />
+      </div>
+    </div>
+  </section>
 </div>
