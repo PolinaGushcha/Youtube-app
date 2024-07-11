@@ -2,7 +2,7 @@
   <div class="container">
     <nav class="nav">
       <div class="search-container">
-        <button (click)="deleteSearchingText()" [routerLink]="['/']" routerLinkActive="active" class="logo-button">
+        <button (click)="deleteSearchAndSort()" [routerLink]="['/']" routerLinkActive="active" class="logo-button">
           <img src="/logo.svg" alt="Logo" />
         </button>
         <div class="search-bar">
@@ -10,9 +10,9 @@
             class="search-input"
             type="text"
             placeholder="What are you want to find out?"
-            [(ngModel)]="searchingText" />
+            [(ngModel)]="filterDataByText" />
           <button
-            (click)="getSearchingText(searchingText)"
+            (click)="handleFilterDataByText(filterDataByText)"
             [routerLink]="['/results']"
             routerLinkActive="active"
             class="search-button">
@@ -37,32 +37,37 @@
       <div class="section">
         <p class="sort-text">Sorting by:</p>
         <div class="sort-list">
-          <button
-            [ngStyle]="{ color: upAndDownIsAvaliable === 'date' ? 'red' : '#2F80ED' }"
-            (click)="handleSortObj('date')">
+          <button [ngStyle]="{ color: upAndDownType === 'date' ? 'red' : '#2F80ED' }" (click)="handleSortType('date')">
             date
           </button>
           <button
-            [ngStyle]="{ color: upAndDownIsAvaliable === 'date' ? 'red' : '#2F80ED' }"
+            [ngStyle]="{ color: upAndDownType === 'date' ? 'red' : '#2F80ED' }"
             (click)="reverseArrow()"
-            *ngIf="upAndDownIsAvaliable === 'date'">
-            <img [ngClass]="{ arrow: !upAndDown, arrowUp: upAndDown }" src="/arrow.svg" alt="arrow" />
+            *ngIf="upAndDownType === 'date'">
+            <img
+              [ngClass]="{ arrow: !upAndDownIsAvaliable, arrowUp: upAndDownIsAvaliable }"
+              src="/arrow.svg"
+              alt="arrow" />
           </button>
           <button
-            [ngStyle]="{ color: upAndDownIsAvaliable === 'countOfViews' ? 'red' : '#2F80ED' }"
-            (click)="handleSortObj('countOfViews')">
+            [ngStyle]="{ color: upAndDownType === 'countOfViews' ? 'red' : '#2F80ED' }"
+            (click)="handleSortType('countOfViews')">
             count of views
           </button>
-          <button (click)="reverseArrow()" *ngIf="upAndDownIsAvaliable === 'countOfViews'">
-            <img [ngClass]="{ arrow: !upAndDown, arrowUp: upAndDown }" class="arrow" src="/arrow.svg" alt="arrow" />
+          <button (click)="reverseArrow()" *ngIf="upAndDownType === 'countOfViews'">
+            <img
+              [ngClass]="{ arrow: !upAndDownIsAvaliable, arrowUp: upAndDownIsAvaliable }"
+              class="arrow"
+              src="/arrow.svg"
+              alt="arrow" />
           </button>
           <button
-            [ngStyle]="{ color: upAndDownIsAvaliable === 'byWordOrSentance' ? 'red' : '#2F80ED' }"
-            (click)="handleSortObj('byWordOrSentance')">
+            [ngStyle]="{ color: upAndDownType === 'byWordOrSentance' ? 'red' : '#2F80ED' }"
+            (click)="handleSortType('byWordOrSentance')">
             by word or sentance
           </button>
         </div>
-        <input [(ngModel)]="sortingText" class="sort-input" type="text" name="" id="" />
+        <input class="sort-input" type="text" name="" id="" />
       </div>
     </div>
   </section>

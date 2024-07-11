@@ -43,6 +43,7 @@ module.exports = tseslint.config(
     ],
     processor: angular.processInlineTemplates,
     rules: {
+      "@typescript-eslint/no-empty-function": "off",
       "@typescript-eslint/no-explicit-any": "error",
       "@angular-eslint/directive-selector": [
         "error",

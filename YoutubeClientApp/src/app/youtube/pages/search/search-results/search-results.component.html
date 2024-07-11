@@ -1,12 +1,11 @@
-<section *ngIf="showDiv" class="search-results">
+<section *ngIf="showSearchResultsComponent" class="search-results">
   <div
     class="card"
     *ngFor="
-      let card of data
-        | filter: inputVal
-        | sortByDate: sortType.sortByDate : sortType.dateUp
-        | countOfViews: sortType.countOfViews : sortType.countOfViewsUp
-        | byWordOrSentance: sortType.byWordOrSentance : sortType.byWordOrSentanceText
+      let card of cards
+        | sortByDate: sortObject.sortByDate : sortObject.sortByDateUp
+        | countOfViews: sortObject.countOfViews : sortObject.countOfViewsUp
+        | byWordOrSentance: sortObject.byWordOrSentance : sortObject.byWordOrSentanceText
     ">
     <div class="card-container" [ngClass]="getColorClass(card.snippet.publishedAt)">
       <img class="card-img" src="{{ card.snippet.thumbnails.medium.url }}" alt="{{ card.id }}" />

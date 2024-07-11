@@ -86,7 +86,7 @@ export interface Statistics {
   
 export interface ISortObj  {
     sortByDate: boolean
-    dateUp: boolean
+    sortByDateUp: boolean
     countOfViews: boolean
     countOfViewsUp: boolean
     byWordOrSentance: boolean

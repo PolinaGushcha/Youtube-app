@@ -12,48 +12,44 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-
   public displaySortCpmponent?: boolean;
-  public toggleSortComponent () {
+
+  public filterDataByText = "";
+
+  public sortByWordOrSentanceText = "";
+
+  public upAndDownIsAvaliable?: boolean;
+
+  public upAndDownType = "";
+
+
+
+  deleteSearchAndSort () {
+    this.displaySortCpmponent = false;
+    this.filterDataByText = "";
+  }
+
+  toggleSortComponent () {
     this.displaySortCpmponent = !this.displaySortCpmponent;
   }
 
-  public searchingText = "";
-  @Output() shareSearchingText = new EventEmitter<string>()
-  public getSearchingText (value: string) {
-    this.shareSearchingText.emit(value)
+  @Output() shareFilterDataByText = new EventEmitter<string>()
+  handleFilterDataByText (value: string) {
+    this.shareFilterDataByText.emit(value);
   }
 
+  @Output() shareSortType = new EventEmitter<string>()
+  handleSortType (value: string) {
+    this.upAndDownIsAvaliable = false;
+    this.upAndDownType = this.upAndDownType === value ? '' : value;
 
-  
-  
-  public sortingText = "";
-  // @Output() shareSortingText = new EventEmitter<string>()
-  // public getSortingText () {
-  //   // this.shareSortingText.emit(this.sortingText)
-  //   console.log('dhdhd')
-  // }
-
-
-
-
-  public deleteSearchingText () {
-    this.displaySortCpmponent = false;
-    this.searchingText = ""
+    this.shareUpAndDownArrow.emit(this.upAndDownIsAvaliable);
+    this.shareSortType.emit(value);
   }
 
-  public upAndDownIsAvaliable = ''
-  public upAndDown = false;
-  @Output() shareUpAndDown = new EventEmitter<boolean>();
-  public reverseArrow () {
-    this.upAndDown = !this.upAndDown;
-    this.shareUpAndDown.emit(this.upAndDown)
-  }
-
-  @Output() shareSortObj = new EventEmitter<string>()
-  public handleSortObj (value: string) {
-    this.upAndDown = false;
-    this.upAndDownIsAvaliable = this.upAndDownIsAvaliable === value ? '' : value;
-    this.shareSortObj.emit(value)
+  @Output() shareUpAndDownArrow = new EventEmitter<boolean>();
+  reverseArrow () {
+    this.upAndDownIsAvaliable = !this.upAndDownIsAvaliable;
+    this.shareUpAndDownArrow.emit(this.upAndDownIsAvaliable);
   }
 }
