@@ -83,12 +83,3 @@ export interface Statistics {
     favoriteCount: string
     commentCount: string
 }
-  
-export interface ISortObj  {
-    sortByDate: boolean
-    sortByDateUp: boolean
-    countOfViews: boolean
-    countOfViewsUp: boolean
-    byWordOrSentance: boolean
-    byWordOrSentanceText: string
-}

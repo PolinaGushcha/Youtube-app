@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './core/header/header.component';
-import { SearchItemComponent } from './youtube/pages/search/search-item/search-item.component';
-import { SearchResultsComponent } from './youtube/pages/search/search-results/search-results.component';
 import {RouterModule} from '@angular/router';
 
 
@@ -11,7 +8,7 @@ import {RouterModule} from '@angular/router';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [RouterModule, RouterOutlet, HeaderComponent, SearchResultsComponent, SearchItemComponent]
+    imports: [RouterModule, RouterOutlet]
 })
 export class AppComponent {
 

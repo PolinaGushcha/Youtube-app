@@ -2,20 +2,20 @@ import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/cor
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ISortObj, Item } from '../../../../types/response';
-import { GetBorderColorService } from '../../../../core/services/get-border-color.service';
-import { SortByDatePipe } from "../../../../shared/pipes/sort-by-date.pipe";
-import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
-import { CountOfViewsPipe } from "../../../../shared/pipes/count-of-views.pipe";
-import { ByWordOrSentancePipe } from "../../../../shared/pipes/by-word-or-sentance.pipe";
-import * as data from '../../../../assets/response.json'
+import { ISortObj } from '../../../types/sorting';
+import { Item } from '../../../types/response';
+import { GetBorderColorService } from '../../services/get-border-color.service';
+import { SortByDatePipe } from '../../../shared/pipes/sort-by-date.pipe';
+import { CountOfViewsPipe } from '../../../shared/pipes/count-of-views.pipe';
+import { ByWordOrSentancePipe } from '../../../shared/pipes/by-word-or-sentance.pipe';
+import * as data from "../../../assets/response.json"
 
 @Component({
     selector: 'app-search-results',
     standalone: true,
     templateUrl: './search-results.component.html',
     styleUrl: './search-results.component.scss',
-    imports: [FormsModule, CommonModule, SortByDatePipe, FilterPipe, CountOfViewsPipe, ByWordOrSentancePipe]
+    imports: [FormsModule, CommonModule, SortByDatePipe, CountOfViewsPipe, ByWordOrSentancePipe]
 })
 export class SearchResultsComponent implements OnChanges {
 

@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

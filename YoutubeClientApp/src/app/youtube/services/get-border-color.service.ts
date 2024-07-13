@@ -6,9 +6,7 @@ import { differenceInDays } from 'date-fns';
 })
 export class GetBorderColorService {
 
-  constructor() { }
-
-  public getColorClass (date: string | undefined): string {
+  getColorClass (date: string | undefined): string {
     const currentDate = new Date();
     if (date) {
       const targetDate = new Date(date);

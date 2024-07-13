@@ -1,1 +1,15 @@
-<p>login works!</p>
+<form action="" class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1 class="form-title">Login</h1>
+  <label class="form-label">
+    login
+    <input formControlName="username" class="form-input" type="text" placeholder="Done Joe" name="" id="" />
+  </label>
+  <label class="form-label">
+    password
+    <input formControlName="password" class="form-input" type="text" name="" id="" />
+  </label>
+  <div class="form-actions">
+    <a class="form-link" [routerLink]="['/registration']" routerLinkActive="active">Registration</a>
+    <button type="submit" class="form-button">Login</button>
+  </div>
+</form>

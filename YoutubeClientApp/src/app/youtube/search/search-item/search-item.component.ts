@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as cardsData from "../../../../assets/response.json"
+import * as data from "../../../assets/response.json";
 import { CommonModule, DatePipe } from '@angular/common';
 import { Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GetBorderColorService } from '../../../../core/services/get-border-color.service';
+import { GetBorderColorService } from '../../services/get-border-color.service';
 
 @Component({
   selector: 'app-search-item',
@@ -17,12 +17,12 @@ export class SearchItemComponent {
   public activatedRouter: ActivatedRoute = inject(ActivatedRoute)
   public router: Router = inject(Router);
 
-  public data = cardsData.items.find(el => el.id == this.activatedRouter.snapshot.params['id'])
+  public card = data.items.find(el => el.id == this.activatedRouter.snapshot.params['id'])
 
   constructor(private _location: Location) {}
 
   pipe = new DatePipe('en-US');
-  myFormattedDate = this.pipe.transform(this.data?.snippet.publishedAt, 'short');
+  myFormattedDate = this.pipe.transform(this.card?.snippet.publishedAt, 'short');
 
   goBack() {
     this._location.back();

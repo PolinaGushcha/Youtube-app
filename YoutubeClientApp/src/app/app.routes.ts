@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
-import { SearchResultsComponent } from './youtube/pages/search/search-results/search-results.component';
-import { SearchItemComponent } from './youtube/pages/search/search-item/search-item.component';
-import { EmptyRouteComponent } from './youtube/pages/empty-route/empty-route.component';
-import { HeaderComponent } from './core/header/header.component';
+import { SearchResultsComponent } from './youtube/search/search-results/search-results.component';
+import { SearchItemComponent } from './youtube/search/search-item/search-item.component';
+import { EmptyRouteComponent } from './youtube/empty-route/empty-route.component';
 import { LoginComponent } from './auth/login/login.component';
+import { LayoutComponent } from './core/layout/layout.component';
+import { RegistrationComponent } from './auth/registration/registration.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HeaderComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '',
@@ -17,6 +18,10 @@ export const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+      },
+      {
+        path: 'registration',
+        component: RegistrationComponent,
       },
       {
         path: 'search-item/:id',
