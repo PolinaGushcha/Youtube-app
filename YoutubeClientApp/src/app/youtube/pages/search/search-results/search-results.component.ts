@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -17,7 +17,7 @@ import * as data from '../../../../assets/response.json'
     styleUrl: './search-results.component.scss',
     imports: [FormsModule, CommonModule, SortByDatePipe, FilterPipe, CountOfViewsPipe, ByWordOrSentancePipe]
 })
-export class SearchResultsComponent implements OnInit, OnChanges {
+export class SearchResultsComponent implements OnChanges {
 
   public cards: Item[] = [];
 
@@ -45,14 +45,7 @@ export class SearchResultsComponent implements OnInit, OnChanges {
   constructor(private router: Router) {}
 
 
-
-  ngOnInit() {
-    this.getCardsValues();
-    this.router.events.subscribe(() => {
-      this.showSearchResultsComponent = this.router.url.includes("/results");
-    });
-  }
-
+  
   ngOnChanges(changes: SimpleChanges): void {
     if( changes["filterDataByText"]) {
       this.getCardsValues();

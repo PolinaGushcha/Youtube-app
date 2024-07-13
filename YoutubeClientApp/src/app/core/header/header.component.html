@@ -2,7 +2,7 @@
   <div class="container">
     <nav class="nav">
       <div class="search-container">
-        <button (click)="deleteSearchAndSort()" [routerLink]="['/']" routerLinkActive="active" class="logo-button">
+        <button class="logo-button">
           <img src="/logo.svg" alt="Logo" />
         </button>
         <div class="search-bar">
@@ -11,13 +11,7 @@
             type="text"
             placeholder="What are you want to find out?"
             [(ngModel)]="filterDataByText" />
-          <button
-            (click)="handleFilterDataByText(filterDataByText)"
-            [routerLink]="['/results']"
-            routerLinkActive="active"
-            class="search-button">
-            search
-          </button>
+          <button (click)="handleFilterDataByText(filterDataByText)" class="search-button">search</button>
         </div>
         <button class="settings-button" (click)="toggleSortComponent()">
           <img src="/sort.svg" alt="Settings" />
@@ -72,3 +66,5 @@
     </div>
   </section>
 </div>
+
+<router-outlet />

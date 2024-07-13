@@ -24,10 +24,10 @@ export class HeaderComponent {
 
 
 
-  deleteSearchAndSort () {
-    this.displaySortCpmponent = false;
-    this.filterDataByText = "";
-  }
+  // deleteSearchAndSort () {
+  //   this.displaySortCpmponent = false;
+  //   this.filterDataByText = "";
+  // }
 
   toggleSortComponent () {
     this.displaySortCpmponent = !this.displaySortCpmponent;
