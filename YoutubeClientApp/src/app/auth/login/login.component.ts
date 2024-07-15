@@ -14,6 +14,8 @@ import { IAuth } from '../../types/auth';
 export class LoginComponent {
   public router = inject(Router);
 
+  public loginService = inject(LoginService)
+
   public form = new FormGroup({
     username: new FormControl<string | null>(null, Validators.required),
     password: new FormControl<string | null>(null, Validators.required),
@@ -24,7 +26,7 @@ export class LoginComponent {
   onSubmit() {
     const authData = this.form.value as IAuth
     if (this.form.valid) {
-      inject(LoginService).setObject("authData", authData)
+      this.loginService.setObject("authData", authData)
       this.router.navigate([''])
     }
   }

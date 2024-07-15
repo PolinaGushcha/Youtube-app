@@ -16,4 +16,24 @@ import { RegistrationComponent } from '../../auth/registration/registration.comp
 })
 export class LayoutComponent {
 
+  public filterDataByText = "filterDataByText"
+
+  public sortType = '';
+
+  public upAndDownIsAvaliable = false;
+
+
+  
+  getFilterDataByText (text: string) {
+    this.filterDataByText = text;
+  }
+
+  getSortType (text: string) {
+    this.sortType = text;
+  }
+  
+  getUpAndDownArrow (value: boolean) {
+      this.upAndDownIsAvaliable = value
+  }
+
 }

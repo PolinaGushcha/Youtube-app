@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,6 +22,8 @@ export class HeaderComponent {
 
   public upAndDownType = "";
 
+  public router = inject(Router)
+
 
 
   // deleteSearchAndSort () {
@@ -35,6 +38,7 @@ export class HeaderComponent {
   @Output() shareFilterDataByText = new EventEmitter<string>()
   handleFilterDataByText (value: string) {
     this.shareFilterDataByText.emit(value);
+    this.router.navigate(['results']); 
   }
 
   @Output() shareSortType = new EventEmitter<string>()

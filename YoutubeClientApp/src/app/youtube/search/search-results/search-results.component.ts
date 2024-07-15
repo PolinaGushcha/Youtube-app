@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ISortObj } from '../../../types/sorting';
@@ -15,7 +15,7 @@ import * as data from "../../../assets/response.json"
     standalone: true,
     templateUrl: './search-results.component.html',
     styleUrl: './search-results.component.scss',
-    imports: [FormsModule, CommonModule, SortByDatePipe, CountOfViewsPipe, ByWordOrSentancePipe]
+    imports: [FormsModule, CommonModule, SortByDatePipe, CountOfViewsPipe, ByWordOrSentancePipe, RouterModule]
 })
 export class SearchResultsComponent implements OnChanges {
 
@@ -100,7 +100,9 @@ export class SearchResultsComponent implements OnChanges {
   }
 
   navigateToRoute(itemData: string) {
-    this.router.navigate(["/search-item", itemData])
+    this.router.navigate(["/search-item", itemData]).then(success => {
+      console.log('Navigation success?', success);
+    });
   }
 
   getColorClass (date: string | undefined): string {
