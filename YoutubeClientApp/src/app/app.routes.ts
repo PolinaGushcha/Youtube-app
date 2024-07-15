@@ -5,6 +5,7 @@ import { EmptyRouteComponent } from './youtube/empty-route/empty-route.component
 import { LoginComponent } from './auth/login/login.component';
 import { LayoutComponent } from './core/layout/layout.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
+import { canActivateAuth } from './auth/access.guard';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,7 @@ export const routes: Routes = [
         path: '**',
         component: EmptyRouteComponent,
       },
-    ]
+    ],
+    canActivate: [canActivateAuth]
   },
 ];

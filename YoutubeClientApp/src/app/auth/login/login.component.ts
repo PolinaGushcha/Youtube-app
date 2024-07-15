@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { LoginService } from '../services/login.service';
+import { IAuth } from '../../types/auth';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +12,20 @@ import { RouterModule } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  public router = inject(Router);
+
   public form = new FormGroup({
-    username: new FormControl(null),
-    password: new FormControl(null),
+    username: new FormControl<string | null>(null, Validators.required),
+    password: new FormControl<string | null>(null, Validators.required),
   })
 
-  onSubmit() {
-    console.dir(this.form.value)
-  }
 
+
+  onSubmit() {
+    const authData = this.form.value as IAuth
+    if (this.form.valid) {
+      inject(LoginService).setObject("authData", authData)
+      this.router.navigate([''])
+    }
+  }
 }
