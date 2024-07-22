@@ -1,40 +1,32 @@
 import { Routes } from '@angular/router';
-import { SearchResultsComponent } from './youtube/search/search-results/search-results.component';
-import { SearchItemComponent } from './youtube/search/search-item/search-item.component';
 import { EmptyRouteComponent } from './youtube/empty-route/empty-route.component';
 import { LoginComponent } from './auth/login/login.component';
-import { LayoutComponent } from './core/layout/layout.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
-// import { canActivateAuth } from './auth/access.guard';
+import { canActivateAuth } from './auth/access.guard';
+import { LayoutComponent } from './core/layout/layout.component';
 
-export const routes: Routes = [
+export const appRoutes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent,
+  },
+  {
+    path: 'layout',
+    component: LayoutComponent,
+    loadChildren: () => import('./core/layout/layout.routers').then(m => m.layoutRoutes),
+    canActivate: [canActivateAuth],
+  },
   {
     path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: 'search-item/:id',
-        component: SearchItemComponent,
-        pathMatch: 'full',
-      },
-      {
-        path: 'results',
-        component: SearchResultsComponent,
-        pathMatch: 'full',
-      },
-      {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: 'registration',
-        component: RegistrationComponent,
-      },
-      {
-        path: '**',
-        component: EmptyRouteComponent,
-      },
-    ],
-    // canActivate: [canActivateAuth]
+    redirectTo: 'layout',
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    component: EmptyRouteComponent,
   },
 ];

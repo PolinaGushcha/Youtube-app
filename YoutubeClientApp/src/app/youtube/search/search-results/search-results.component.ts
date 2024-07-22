@@ -8,7 +8,7 @@ import { GetBorderColorService } from '../../services/get-border-color.service';
 import { SortByDatePipe } from '../../../shared/pipes/sort-by-date.pipe';
 import { CountOfViewsPipe } from '../../../shared/pipes/count-of-views.pipe';
 import { ByWordOrSentancePipe } from '../../../shared/pipes/by-word-or-sentance.pipe';
-import * as data from "../../../assets/response.json"
+import * as data from "../../../assets/response.json";
 
 @Component({
     selector: 'app-search-results',

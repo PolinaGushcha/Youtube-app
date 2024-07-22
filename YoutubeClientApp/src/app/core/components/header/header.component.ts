@@ -16,20 +16,14 @@ export class HeaderComponent {
 
   public filterDataByText = "";
 
-  public sortByWordOrSentanceText = "";
+  public sortByWordOrSentanceText?: string = "";
 
   public upAndDownIsAvaliable?: boolean;
 
   public upAndDownType = "";
 
   public router = inject(Router)
-
-
-
-  // deleteSearchAndSort () {
-  //   this.displaySortCpmponent = false;
-  //   this.filterDataByText = "";
-  // }
+  
 
   toggleSortComponent () {
     this.displaySortCpmponent = !this.displaySortCpmponent;
@@ -38,7 +32,6 @@ export class HeaderComponent {
   @Output() shareFilterDataByText = new EventEmitter<string>()
   handleFilterDataByText (value: string) {
     this.shareFilterDataByText.emit(value);
-    this.router.navigate(['results']); 
   }
 
   @Output() shareSortType = new EventEmitter<string>()
