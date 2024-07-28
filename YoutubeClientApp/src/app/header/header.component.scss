@@ -22,12 +22,6 @@
       max-width: 570px;
       width: 100%;
 
-      .logo-button {
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-      }
-
       .search-bar {
         max-width: 476px;
         width: 100%;
@@ -36,18 +30,8 @@
         .search-input {
           border: none;
           background-color: #efefef;
-          width: 83%;
+          width: 100%;
           padding: 5px 6px 3px;
-        }
-
-        .search-button {
-          background-color: #2f80ed;
-          padding: 4px 22px;
-          border-radius: 0px 5px 5px 0px;
-          margin: 0 0;
-          cursor: pointer;
-          color: white;
-          border: none;
         }
       }
 
@@ -68,9 +52,24 @@
   .user-info {
     display: flex;
     color: #4f4f4f;
+    align-items: center;
 
     .user-icon {
       margin-left: 8px;
+    }
+
+    .logout-button {
+      background-color: #2f80ed;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      margin-left: 10px;
+      height: 25px;
+      cursor: pointer;
+    }
+
+    .logout-button:hover {
+      box-shadow: 0px 5px 30px 0px rgba(47, 128, 237, 1);
     }
   }
 }

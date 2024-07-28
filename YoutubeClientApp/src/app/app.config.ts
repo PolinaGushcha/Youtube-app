@@ -1,10 +1,13 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+
 import { appRoutes } from './app.routes';
-import { layoutRoutes } from './core/layout/layout.routers';
+import { provideHttpClient } from '@angular/common/http';
+import { layoutRoutes } from './layout/layout.routers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter([...appRoutes, ...layoutRoutes]),
   ],

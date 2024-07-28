@@ -7,10 +7,9 @@ export const layoutRoutes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'search-item/:id',
-        loadComponent: () =>
-          import('../../youtube/search/search-item/search-item.component').then(m => m.SearchItemComponent),
+        path: 'item/:id',
+        loadComponent: () => import('../item/item.component').then(m => m.ItemComponent),
       },
-    ]
+    ],
   },
 ];

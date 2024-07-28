@@ -1,85 +1,52 @@
 export interface IData {
-    kind: string
-    etag: string
-    pageInfo: PageInfo
-    items: Item[]
+  etag: string;
+  id: {
+    kind: string;
+    videoId: string;
+  };
+  items: ICard[];
+  kind: string;
+  pageInfo: {
+    resultsPerPage: number;
+    totalResults: number;
+  };
+  snippet: {
+    publishAt: string;
+    publishTime: string;
+    channelId: string;
+    title: string;
+    description: string;
+    liveBroadcastContent: string;
+    channelTitle: string;
+    thumbnails: IThumbnails;
+  };
 }
-  
-export interface PageInfo {
-    totalResults: number
-    resultsPerPage: number
+
+export interface ICard {
+  etag: string;
+  id: {
+    kind: string;
+    videoId: string;
+  };
+  kind: string;
+  statistics?: IStatistic;
 }
-  
-export interface Item {
-    kind: string
-    etag: string
-    id: string
-    snippet: Snippet
-    statistics: Statistics
+
+export interface IStatistic {
+  commentCount: string;
+  favoriteCount: string;
+  likeCount: string;
+  viewCount: string;
 }
-  
-export interface Snippet {
-    publishedAt: string
-    channelId: string
-    title: string
-    description: string
-    thumbnails: Thumbnails
-    channelTitle: string
-    tags: string[]
-    categoryId: string
-    liveBroadcastContent: string
-    localized: Localized
-    defaultAudioLanguage: string
-    defaultLanguage?: string
+
+export interface IThumbnails {
+  default: IQuality;
+  high: IQuality;
+  medium: IQuality;
 }
-  
-export interface Thumbnails {
-    default: Default
-    medium: Medium
-    high: High
-    standard: Standard
-    maxres: Maxres
-}
-  
-export interface Default {
-    url: string
-    width: number
-    height: number
-}
-  
-export interface Medium {
-    url: string
-    width: number
-    height: number
-}
-  
-export interface High {
-    url: string
-    width: number
-    height: number
-}
-  
-export interface Standard {
-    url: string
-    width: number
-    height: number
-}
-  
-export interface Maxres {
-    url: string
-    width: number
-    height: number
-}
-  
-export interface Localized {
-    title: string
-    description: string
-}
-  
-export interface Statistics {
-    viewCount: string
-    likeCount: string
-    dislikeCount: string
-    favoriteCount: string
-    commentCount: string
+
+export interface IQuality {
+  url: string;
+  width: number;
+  height: number;
 }

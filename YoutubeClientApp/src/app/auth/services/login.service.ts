@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { IAuth } from '../../types/auth';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-
   setObject(key: string, value: IAuth): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
@@ -15,4 +14,7 @@ export class LoginService {
     return storedValue ? JSON.parse(storedValue) : null;
   }
 
+  removeObject(key: string): void {
+    localStorage.removeItem(key);
+  }
 }
