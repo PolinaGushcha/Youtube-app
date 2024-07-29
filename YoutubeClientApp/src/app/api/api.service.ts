@@ -10,7 +10,8 @@ export class ApiService {
   public apiResource = ['search', 'videos'];
   public baseApiUrl = 'https://www.googleapis.com/youtube/v3/';
   public apiPart = ['snippet', 'statistics'];
-  public apiKey = 'AIzaSyBwaueZ3JCaPVAXnJO5dbF8R352iuEvwk0';
+  // public apiKey = 'AIzaSyBwaueZ3JCaPVAXnJO5dbF8R352iuEvwk0';
+  public apiKey = 'AIzaSyCUNnZ-rIKdcTOrRoNpFjakzMSGWd68s6c';
   public apiType = 'video';
   public apiQ = '';
   public apiId = '';

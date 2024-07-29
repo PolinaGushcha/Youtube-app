@@ -1,4 +1,10 @@
-<app-header (shareData)="getData($event)" (shareIsLoading)="getIsLoading($event)"></app-header>
+<app-header
+  (shareData)="getData($event)"
+  (shareIsLoading)="getIsLoading($event)"
+  (shareSortType)="getSortType($event)"
+  (shareUpAndDownArrow)="getUpAndDownArrow($event)"
+  >></app-header
+>
 
 <div *ngIf="isLoading && showComponent">
   <h3>Loading</h3>

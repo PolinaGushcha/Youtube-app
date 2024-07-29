@@ -48,4 +48,23 @@ export class LayoutComponent {
   navigateToRoute(id: string) {
     this.router.navigateByUrl(`layout/item/${id}`);
   }
+
+  public sortType = '';
+
+  public upAndDownIsAvaliable = false;
+
+  getSortType(text: string) {
+    this.sortType = text;
+  }
+
+  getUpAndDownArrow(value: boolean) {
+    this.upAndDownIsAvaliable = value;
+  }
 }
+
+// *ngFor="
+// let card of data
+// | sortByDate: sortObject.sortByDate : sortObject.sortByDateUp
+// | countOfViews: sortObject.countOfViews : sortObject.countOfViewsUp
+// | byWordOrSentance: sortObject.byWordOrSentance : sortObject.byWordOrSentanceText
+// "

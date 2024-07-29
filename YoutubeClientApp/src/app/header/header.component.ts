@@ -2,10 +2,10 @@ import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { IData } from '../types/response';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../auth/services/login.service';
 import { Router } from '@angular/router';
-import { forkJoin, map, mergeMap, of } from 'rxjs';
+import { forkJoin, map, mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -66,5 +66,27 @@ export class HeaderComponent implements OnInit {
     if (value.length % 3 === 0) {
       this.searchVideos(value);
     }
+  }
+
+  public displaySortCpmponent?: boolean;
+
+  public upAndDownIsAvaliable?: boolean;
+
+  public upAndDownType = '';
+
+  toggleSortComponent() {
+    this.displaySortCpmponent = !this.displaySortCpmponent;
+  }
+  @Output() shareSortType = new EventEmitter<string>();
+  handleSortType(value: string) {
+    this.upAndDownIsAvaliable = false;
+    this.upAndDownType = this.upAndDownType === value ? '' : value;
+    this.shareUpAndDownArrow.emit(this.upAndDownIsAvaliable);
+    this.shareSortType.emit(value);
+  }
+  @Output() shareUpAndDownArrow = new EventEmitter<boolean>();
+  reverseArrow() {
+    this.upAndDownIsAvaliable = !this.upAndDownIsAvaliable;
+    this.shareUpAndDownArrow.emit(this.upAndDownIsAvaliable);
   }
 }
