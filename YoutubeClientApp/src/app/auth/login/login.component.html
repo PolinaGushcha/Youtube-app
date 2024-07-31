@@ -3,15 +3,37 @@
   <label class="form-label">
     login
     <input formControlName="username" class="form-input" type="text" placeholder="Done Joe" name="" id="" />
-    <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched">
-      <small>Username is required.</small>
+    <div
+      *ngIf="form.controls['username']?.invalid && (form.get('username')?.touched || form.controls['username']?.dirty)">
+      <small *ngIf="form.controls['username'].errors?.['required']"> Username is required. </small>
+      <small *ngIf="form.controls['username'].errors?.['email']"> The login email is invalid </small>
     </div>
   </label>
   <label class="form-label">
     password
     <input formControlName="password" class="form-input" type="text" name="" id="" />
-    <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched">
-      <small>Username is required.</small>
+
+    <div
+      *ngIf="form.controls['password']?.invalid && (form.get('password')?.touched || form.controls['password']?.dirty)">
+      <small *ngIf="form.controls['password'].errors?.['required']"> Please enter a password </small>
+    </div>
+
+    <div *ngIf="form.controls['password']?.invalid && form.controls['password']?.dirty">
+      <small *ngIf="form.controls['password'].errors?.['passwordUpperLowerCases']">
+        {{ form.controls['password'].errors?.['passwordUpperLowerCases'] }}
+      </small>
+    </div>
+
+    <div *ngIf="form.controls['password']?.invalid && form.controls['password']?.dirty">
+      <small *ngIf="form.controls['password'].errors?.['passwordLettersNumbers']">
+        {{ form.controls['password'].errors?.['passwordLettersNumbers'] }}
+      </small>
+    </div>
+
+    <div *ngIf="form.controls['password']?.invalid && form.controls['password']?.dirty">
+      <small *ngIf="form.controls['password'].errors?.['passwordSpecialCharacter']">
+        {{ form.controls['password'].errors?.['passwordSpecialCharacter'] }}
+      </small>
     </div>
   </label>
   <div class="form-actions">

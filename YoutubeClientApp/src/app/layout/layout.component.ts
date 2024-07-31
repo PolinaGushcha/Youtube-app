@@ -5,7 +5,6 @@ import { ItemComponent } from '../item/item.component';
 import { HeaderComponent } from '../header/header.component';
 import { IData } from '../types/response';
 import { GetBorderColorService } from './services/get-border-color.service';
-import { ApiService } from '../api/api.service';
 
 @Component({
   selector: 'app-layout',
@@ -22,8 +21,7 @@ export class LayoutComponent {
 
   constructor(
     private router: Router,
-    private borderService: GetBorderColorService,
-    private apiService: ApiService
+    private borderService: GetBorderColorService
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

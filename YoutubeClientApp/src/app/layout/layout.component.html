@@ -2,9 +2,7 @@
   (shareData)="getData($event)"
   (shareIsLoading)="getIsLoading($event)"
   (shareSortType)="getSortType($event)"
-  (shareUpAndDownArrow)="getUpAndDownArrow($event)"
-  >></app-header
->
+  (shareUpAndDownArrow)="getUpAndDownArrow($event)"></app-header>
 
 <div *ngIf="isLoading && showComponent">
   <h3>Loading</h3>
@@ -23,10 +21,6 @@
           <img src="/liked.svg" alt="liked" />
           <p class="card-text">{{ card.items[0].statistics?.likeCount }}</p>
         </li>
-        <!-- <li class="card-li">
-          <img src="/dislike.svg" alt="dislike" />
-          <p class="card-text">{{ card.items[0].statistics?.favoriteCount }}</p>
-        </li> -->
         <li class="card-li">
           <img src="/comments.svg" alt="comments" />
           <p class="card-text">{{ card.items[0].statistics?.commentCount }}</p>
