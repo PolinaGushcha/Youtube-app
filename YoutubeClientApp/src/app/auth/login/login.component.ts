@@ -74,6 +74,7 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.form.markAllAsTouched();
     const authData = this.form.value as IAuth;
     if (this.form.valid) {
       this.loginService.setObject('authData', authData);

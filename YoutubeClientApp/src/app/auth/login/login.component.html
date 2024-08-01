@@ -2,7 +2,14 @@
   <h1 class="form-title">Login</h1>
   <label class="form-label">
     login
-    <input formControlName="username" class="form-input" type="text" placeholder="Done Joe" name="" id="" />
+    <input
+      formControlName="username"
+      [ngClass]="{ 'form-input-error': form.controls['username'].invalid && form.get('username')?.touched }"
+      class="form-input"
+      type="text"
+      placeholder="Done Joe"
+      name=""
+      id="" />
     <div
       *ngIf="form.controls['username']?.invalid && (form.get('username')?.touched || form.controls['username']?.dirty)">
       <small *ngIf="form.controls['username'].errors?.['required']"> Username is required. </small>
@@ -11,7 +18,13 @@
   </label>
   <label class="form-label">
     password
-    <input formControlName="password" class="form-input" type="text" name="" id="" />
+    <input
+      formControlName="password"
+      [ngClass]="{ 'form-input-error': form.controls['password'].invalid && form.get('password')?.touched }"
+      class="form-input"
+      type="text"
+      name=""
+      id="" />
 
     <div
       *ngIf="form.controls['password']?.invalid && (form.get('password')?.touched || form.controls['password']?.dirty)">

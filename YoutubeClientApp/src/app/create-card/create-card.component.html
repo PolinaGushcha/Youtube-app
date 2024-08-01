@@ -1,0 +1,74 @@
+<form action="" class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1 class="form-title">Create new card</h1>
+
+  <label class="form-label">
+    Title
+    <input
+      formControlName="title"
+      [ngClass]="{ 'form-input-error': form.controls['title'].invalid && form.get('title')?.touched }"
+      class="form-input"
+      type="text"
+      minlength="3" />
+    <div *ngIf="form.controls['title']?.invalid && form.get('title')?.touched">
+      <small *ngIf="form.controls['title'].errors?.['required']"> Please enter a title </small>
+      <small *ngIf="form.controls['title'].errors?.['minlength']"> The title is too short </small>
+      <small *ngIf="form.controls['title'].errors?.['maxlength']"> The title is too long </small>
+    </div>
+  </label>
+
+  <label class="form-label">
+    Description
+    <input
+      formControlName="description"
+      [ngClass]="{ 'form-input-error': form.controls['description'].invalid && form.get('description')?.touched }"
+      class="form-input"
+      type="text" />
+    <div *ngIf="form.controls['description']?.invalid && form.get('description')?.touched">
+      <small *ngIf="form.controls['description'].errors?.['maxlength']"> The description is too long </small>
+    </div>
+  </label>
+
+  <label class="form-label">
+    Img
+    <!-- <input type="file" name="" id="" accept=".png, .jpg, .jpeg" /> -->
+    <input
+      formControlName="imgLink"
+      [ngClass]="{ 'form-input-error': form.controls['imgLink'].invalid && form.get('imgLink')?.touched }"
+      class="form-input"
+      type="text" />
+    <div *ngIf="form.controls['imgLink']?.invalid && form.get('imgLink')?.touched">
+      <small *ngIf="form.controls['imgLink'].errors?.['required']"> Please enter a link to the image </small>
+    </div>
+  </label>
+
+  <label class="form-label">
+    Video
+    <input
+      formControlName="videoLink"
+      [ngClass]="{ 'form-input-error': form.controls['videoLink'].invalid && form.get('videoLink')?.touched }"
+      class="form-input"
+      type="text" />
+    <div *ngIf="form.controls['videoLink']?.invalid && form.get('videoLink')?.touched">
+      <small *ngIf="form.controls['videoLink'].errors?.['required']"> Please enter a link to the video </small>
+    </div>
+  </label>
+
+  <label class="form-label">
+    Creation date
+    <input
+      formControlName="creationDate"
+      [ngClass]="{ 'form-input-error': form.controls['creationDate'].invalid && form.get('creationDate')?.touched }"
+      class="form-input"
+      type="datetime-local" />
+    <div *ngIf="form.controls['creationDate']?.invalid && form.get('creationDate')?.touched">
+      <small *ngIf="form.controls['creationDate'].errors?.['required']"> Please enter a creation date </small>
+      <small *ngIf="form.controls['creationDate'].errors?.['maxDateResult']">
+        {{ form.controls['creationDate'].errors?.['maxDateResult'] }}
+      </small>
+    </div>
+  </label>
+  <div class="form-actions">
+    <button (click)="onReset()" class="form-button">Reset</button>
+    <button type="submit" class="form-button">Create card</button>
+  </div>
+</form>
