@@ -45,7 +45,7 @@ export class SearchResultsComponent implements OnChanges {
   constructor(private router: Router) {}
 
 
-  
+
   ngOnChanges(changes: SimpleChanges): void {
     if( changes["filterDataByText"]) {
       this.getCardsValues();
@@ -68,30 +68,30 @@ export class SearchResultsComponent implements OnChanges {
         this.sortObject.countOfViews = false;
         this.sortObject.byWordOrSentance = false;
         break;
-        case 'countOfViews': 
+        case 'countOfViews':
         this.sortObject.sortByDate = false;
         this.sortObject.countOfViews = !this.sortObject.countOfViews;
         this.sortObject.byWordOrSentance = false;
         break;
-        case 'byWordOrSentance': 
+        case 'byWordOrSentance':
         this.sortObject.sortByDate = false ;
         this.sortObject.countOfViews = false;
         this.sortObject.byWordOrSentance = !this.sortObject.byWordOrSentance; break;
       }
       return this.sortObject
   }
-     
+
   getArrowType (value: boolean) {
     switch (true) {
-      case (this.sortObject.sortByDate): 
+      case (this.sortObject.sortByDate):
       this.sortObject.sortByDateUp = value;
       this.sortObject.countOfViewsUp = false;
       break;
-      case (this.sortObject.countOfViews): 
+      case (this.sortObject.countOfViews):
       this.sortObject.sortByDateUp = false;
       this.sortObject.countOfViewsUp = value;
       break;
-      default: 
+      default:
       this.sortObject.sortByDateUp = false;
       this.sortObject.countOfViewsUp = false;
       break;
@@ -100,7 +100,7 @@ export class SearchResultsComponent implements OnChanges {
   }
 
   navigateToRoute(itemData: string) {
-    this.router.navigate(["/search-item", itemData]).then(success => {
+    this.router.navigate(["/layout", itemData]).then(success => {
       console.log('Navigation success?', success);
     });
   }

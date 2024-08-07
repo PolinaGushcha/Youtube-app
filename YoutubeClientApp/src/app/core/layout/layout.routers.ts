@@ -1,16 +1,17 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from './layout.component';
 
 export const layoutRoutes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: 'search-item/:id',
-        loadComponent: () =>
-          import('../../youtube/search/search-item/search-item.component').then(m => m.SearchItemComponent),
-      },
-    ]
+    // component: LayoutComponent,
+    loadComponent: () => {
+      return import('./layout.component').then(m => m.LayoutComponent);
+    },
+  },
+  {
+    path: ':id',
+    loadComponent: () => {
+      return import('../../youtube/search/search-item/search-item.component').then(m => m.SearchItemComponent);
+    },
   },
 ];
