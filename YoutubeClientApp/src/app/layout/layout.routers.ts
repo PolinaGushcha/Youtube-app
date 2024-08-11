@@ -9,8 +9,8 @@ export const layoutRoutes: Routes = [
       {
         path: 'search-item/:id',
         loadComponent: () =>
-          import('../../youtube/search/search-item/search-item.component').then(m => m.SearchItemComponent),
+          import('../youtube/search/search-item/search-item.component').then(m => m.SearchItemComponent),
       },
-    ]
+    ],
   },
 ];

@@ -1,0 +1,15 @@
+<app-header
+  (shareFilterDataByText)="getFilterDataByText($event)"
+  (shareSortType)="getSortType($event)"
+  (shareUpAndDownArrow)="getUpAndDownArrow($event)">
+</app-header>
+
+<div *ngIf="showItemComponent">
+  <app-search-results
+    [filterDataByText]="filterDataByText"
+    [sortType]="sortType"
+    [upAndDownIsAvaliable]="upAndDownIsAvaliable">
+  </app-search-results>
+</div>
+
+<router-outlet />
