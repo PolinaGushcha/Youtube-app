@@ -1,7 +1,9 @@
-export enum todoActionsType {
-  add = '[Favorite] add item',
-  delete = '[Favorite] delete item',
-  load = '[Favorite] load item',
+import { IStatistic } from '../types/response';
+
+export enum cardsActionsType {
+  add = 'add card',
+  delete = 'delete card',
+  load = 'load card',
 }
 
 export interface ICardObj {
@@ -11,8 +13,6 @@ export interface ICardObj {
   imgLink: string;
   videoLink: string;
   creationDate: string;
-}
-
-export interface IFavoriteCards {
-  favoriteCards: ICardObj[];
+  statistics: IStatistic;
+  isLiked?: boolean;
 }

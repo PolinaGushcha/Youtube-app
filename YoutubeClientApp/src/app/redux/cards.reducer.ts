@@ -1,17 +1,17 @@
-import { createReducer, on } from '@ngrx/store';
-import { addFavoriteItem, deleteFavoriteItem } from './cards.actions';
-import { IFavoriteCards } from './state.models';
+import { createFeature, createReducer, on } from '@ngrx/store';
+import { cardsListActions } from './cards.actions';
+import { ICardObj } from './state.models';
 
-const initialState: IFavoriteCards = { favoriteCards: [] };
+const initialState: ICardObj[] = [];
 
-export const favotiteReducer = createReducer(
-  initialState,
-  on(addFavoriteItem, (state, { card }) => ({
-    // ...state,
-    favoriteCards: [...state.favoriteCards, card],
-  })),
-  on(deleteFavoriteItem, (state, { id }) => ({
-    // ...state,
-    favoriteCards: [...state.favoriteCards.filter(el => el.id === id)],
-  }))
-);
+export const cardsReducer = createFeature({
+  name: 'cardsList',
+  reducer: createReducer(
+    initialState,
+    on(cardsListActions.addCard, (state, { card }) => [...state, card]),
+    on(cardsListActions.deleteCard, (state, { id }) => [...state.filter(el => el.id !== id)]),
+    on(cardsListActions.loadCard, state => ({
+      ...state,
+    }))
+  ),
+});

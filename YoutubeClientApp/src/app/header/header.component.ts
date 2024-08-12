@@ -67,7 +67,6 @@ export class HeaderComponent implements OnInit {
       .subscribe(response => {
         this.data = response as IData[];
         this.shareData.emit(this.data);
-        console.log(response);
         this.isLoading = false;
         this.shareIsLoading.emit(this.isLoading);
       });

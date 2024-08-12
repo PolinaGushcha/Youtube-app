@@ -10,8 +10,7 @@ export class ApiService {
   public apiResource = ['search', 'videos'];
   public baseApiUrl = 'https://www.googleapis.com/youtube/v3/';
   public apiPart = ['snippet', 'statistics'];
-  // public apiKey = 'AIzaSyBwaueZ3JCaPVAXnJO5dbF8R352iuEvwk0';
-  public apiKey = 'AIzaSyCUNnZ-rIKdcTOrRoNpFjakzMSGWd68s6c';
+  public apiKey = 'AIzaSyB-sYrDcNSM42Dhm8HPyPt5qHpjmG9dkbM';
   public apiType = 'video';
   public apiQ = '';
   public apiId = '';
@@ -38,6 +37,5 @@ export class ApiService {
     const urlParams = new HttpParams().set('part', 'snippet').set('key', this.apiKey).set('id', id);
     const options = { params: urlParams };
     return this.http.get(`${this.baseApiUrl}${this.apiResource[1]}`, options);
-    // return this.http.get('https://www.googleapis.com/youtube/v3/videos', options);
   }
 }

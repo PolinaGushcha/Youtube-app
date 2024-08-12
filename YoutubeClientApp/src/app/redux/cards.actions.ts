@@ -1,6 +1,11 @@
-import { createAction, props } from '@ngrx/store';
-import { ICardObj, todoActionsType } from './state.models';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { ICardObj, cardsActionsType } from './state.models';
 
-export const addFavoriteItem = createAction(todoActionsType.add, props<{ card: ICardObj }>());
-export const deleteFavoriteItem = createAction(todoActionsType.delete, props<{ id: string }>());
-export const loadFavoriteItem = createAction(todoActionsType.load, props<{ url: string }>());
+export const cardsListActions = createActionGroup({
+  source: 'cardsList',
+  events: {
+    [cardsActionsType.add]: props<{ card: ICardObj }>(),
+    [cardsActionsType.delete]: props<{ id: string }>(),
+    [cardsActionsType.load]: emptyProps(),
+  },
+});

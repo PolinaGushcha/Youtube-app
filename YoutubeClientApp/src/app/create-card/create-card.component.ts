@@ -38,8 +38,6 @@ export class CreateCardComponent {
   onSubmit() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      console.log('card creation is valid');
-      console.log(this.form);
       this.router.navigate(['']);
     }
   }

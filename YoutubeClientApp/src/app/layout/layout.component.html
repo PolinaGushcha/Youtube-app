@@ -29,7 +29,7 @@
         </li>
       </ul>
       <h3 class="card-title">{{ card.snippet.title }}</h3>
-      <button (click)="addFavoriteCard(card)">like</button>
+      <button (click)="addOrRemoveFavoriteCard(card)" class="likeBtn"><app-heart [isLiked]="card.isLiked" /></button>
       <button (click)="navigateToRoute(card.id.videoId)" routerLinkActive="active" class="card-button">more...</button>
     </div>
   </div>
