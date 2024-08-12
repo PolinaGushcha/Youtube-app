@@ -11,11 +11,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { cardsListActions } from '../redux/cards.actions';
 import { HeartComponent } from '../assets/heart/heart.component';
 import { Observable } from 'rxjs';
+import { PaginationComponent } from '../pagination/pagination.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterModule, CommonModule, ItemComponent, HeaderComponent, HeartComponent],
+  imports: [RouterModule, CommonModule, ItemComponent, HeaderComponent, HeartComponent, PaginationComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
@@ -30,6 +31,9 @@ export class LayoutComponent implements OnInit {
 
   public sortType = '';
   public upAndDownIsAvaliable = false;
+
+  public itemsPerPage = 10;
+  public currentPage = 1;
 
   constructor(
     private store: Store<{ cardState: ICardObj[] }>,
@@ -116,5 +120,16 @@ export class LayoutComponent implements OnInit {
 
   removeCard(id: string) {
     this.store.dispatch(cardsListActions.deleteCard({ id }));
+  }
+
+  get paginatedItems() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    if (this.data) {
+      return this.data.slice(startIndex, startIndex + this.itemsPerPage);
+    } else return this.data;
+  }
+
+  onPageChanged(page: number) {
+    this.currentPage = page;
   }
 }

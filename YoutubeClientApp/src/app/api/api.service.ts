@@ -14,7 +14,7 @@ export class ApiService {
   public apiType = 'video';
   public apiQ = '';
   public apiId = '';
-  public apiMaxResults = 10;
+  public apiMaxResults = 30;
 
   getYoutubeApiVideos(value?: string) {
     const urlParams = new HttpParams()
