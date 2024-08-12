@@ -20,6 +20,7 @@ export interface IData {
     channelTitle: string;
     thumbnails: IThumbnails;
   };
+  isLiked?: boolean;
 }
 
 export interface ICard {
@@ -34,7 +35,7 @@ export interface ICard {
 
 export interface IStatistic {
   commentCount: string;
-  favoriteCount: string;
+  favoriteCount?: string;
   likeCount: string;
   viewCount: string;
 }

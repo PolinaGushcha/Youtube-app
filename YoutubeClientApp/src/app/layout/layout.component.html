@@ -8,31 +8,39 @@
   <h3>Loading</h3>
 </div>
 
-<section
-  *ngIf="!isLoading && showItemComponent && !showFavoriteComponent && !showCreateCardComponent"
-  class="search-results">
-  <div *ngFor="let card of data" class="card">
-    <div class="card-container" [ngClass]="getColorClass(card.snippet.publishAt)">
-      <img class="card-img" src="{{ card.snippet.thumbnails.medium.url }}" alt="{{ card.id.videoId }}" />
-      <ul class="card-ul">
-        <li class="card-li">
-          <img src="/viewed.svg" alt="viewed" />
-          <p class="card-text">{{ card.items[0].statistics?.viewCount }}</p>
-        </li>
-        <li class="card-li">
-          <img src="/liked.svg" alt="liked" />
-          <p class="card-text">{{ card.items[0].statistics?.likeCount }}</p>
-        </li>
-        <li class="card-li">
-          <img src="/comments.svg" alt="comments" />
-          <p class="card-text">{{ card.items[0].statistics?.commentCount }}</p>
-        </li>
-      </ul>
-      <h3 class="card-title">{{ card.snippet.title }}</h3>
-      <button (click)="addFavoriteCard(card)">like</button>
-      <button (click)="navigateToRoute(card.id.videoId)" routerLinkActive="active" class="card-button">more...</button>
+<section *ngIf="!isLoading && showItemComponent && !showFavoriteComponent && !showCreateCardComponent">
+  <div class="search-results">
+    <div *ngFor="let card of paginatedItems" class="card">
+      <div class="card-container" [ngClass]="getColorClass(card.snippet.publishAt)">
+        <img class="card-img" src="{{ card.snippet.thumbnails.medium.url }}" alt="{{ card.id.videoId }}" />
+        <ul class="card-ul">
+          <li class="card-li">
+            <img src="/viewed.svg" alt="viewed" />
+            <p class="card-text">{{ card.items[0].statistics?.viewCount }}</p>
+          </li>
+          <li class="card-li">
+            <img src="/liked.svg" alt="liked" />
+            <p class="card-text">{{ card.items[0].statistics?.likeCount }}</p>
+          </li>
+          <li class="card-li">
+            <img src="/comments.svg" alt="comments" />
+            <p class="card-text">{{ card.items[0].statistics?.commentCount }}</p>
+          </li>
+        </ul>
+        <h3 class="card-title">{{ card.snippet.title }}</h3>
+        <button (click)="addOrRemoveFavoriteCard(card)" class="likeBtn"><app-heart [isLiked]="card.isLiked" /></button>
+        <button (click)="navigateToRoute(card.id.videoId)" routerLinkActive="active" class="card-button">
+          more...
+        </button>
+      </div>
     </div>
   </div>
+  <app-pagination
+    [totalItems]="30"
+    [itemsPerPage]="itemsPerPage"
+    [currentPage]="currentPage"
+    (currentPageChange)="onPageChanged($event)">
+  </app-pagination>
 </section>
 
 <router-outlet />

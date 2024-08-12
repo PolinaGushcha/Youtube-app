@@ -1,0 +1,24 @@
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 50px;
+  align-items: center;
+}
+
+.currentPage {
+  margin: 0 10px;
+}
+
+.paginationBtn {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #2f80ed;
+  padding: 10px 40px;
+  cursor: pointer;
+}
+.paginationBtn:disabled {
+  background-color: #8db0de;
+  cursor: default;
+}

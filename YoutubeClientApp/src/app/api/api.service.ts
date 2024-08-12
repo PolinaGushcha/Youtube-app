@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -7,37 +7,37 @@ import { Injectable } from '@angular/core';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  public apiResource = ['search', 'videos'];
-  public baseApiUrl = 'https://www.googleapis.com/youtube/v3/';
-  public apiPart = ['snippet', 'statistics'];
-  // public apiKey = 'AIzaSyBwaueZ3JCaPVAXnJO5dbF8R352iuEvwk0';
-  public apiKey = 'AIzaSyCUNnZ-rIKdcTOrRoNpFjakzMSGWd68s6c';
-  public apiType = 'video';
-  public apiQ = '';
-  public apiId = '';
-  public apiMaxResults = 10;
+  public apiResource = signal(['search', 'videos']);
+  public baseApiUrl = signal('https://www.googleapis.com/youtube/v3/');
+  public apiPart = signal(['snippet', 'statistics']);
+  public apiKey = signal('AIzaSyB-sYrDcNSM42Dhm8HPyPt5qHpjmG9dkbM');
+  public apiType = signal('video');
+  public apiQ = signal('');
+  public apiId = signal('');
+  public apiMaxResults = signal(30);
 
   getYoutubeApiVideos(value?: string) {
-    const urlParams = new HttpParams()
-      .set('part', this.apiPart[0])
-      .set('key', this.apiKey)
-      .set('type', this.apiType)
-      .set('q', value || this.apiQ)
-      .set('maxResults', this.apiMaxResults);
-    const options = { params: urlParams };
-    return this.http.get(`${this.baseApiUrl}${this.apiResource[0]}`, options);
+    const urlParams = computed(() =>
+      new HttpParams()
+        .set('part', this.apiPart()[0])
+        .set('key', this.apiKey())
+        .set('type', this.apiType())
+        .set('q', value || this.apiQ())
+        .set('maxResults', this.apiMaxResults())
+    );
+    const options = { params: urlParams() };
+    return this.http.get(`${this.baseApiUrl}${this.apiResource()[0]}`, options);
   }
 
   getVideoStatistic(value: string) {
-    const urlParams = new HttpParams().set('part', this.apiPart[1]).set('key', this.apiKey).set('id', value);
+    const urlParams = new HttpParams().set('part', this.apiPart()[1]).set('key', this.apiKey()).set('id', value);
     const options = { params: urlParams };
-    return this.http.get(`${this.baseApiUrl}${this.apiResource[1]}`, options);
+    return this.http.get(`${this.baseApiUrl}${this.apiResource()[1]}`, options);
   }
 
   getYoutubeApiItem(id: string) {
-    const urlParams = new HttpParams().set('part', 'snippet').set('key', this.apiKey).set('id', id);
+    const urlParams = new HttpParams().set('part', 'snippet').set('key', this.apiKey()).set('id', id);
     const options = { params: urlParams };
-    return this.http.get(`${this.baseApiUrl}${this.apiResource[1]}`, options);
-    // return this.http.get('https://www.googleapis.com/youtube/v3/videos', options);
+    return this.http.get(`${this.baseApiUrl}${this.apiResource()[1]}`, options);
   }
 }
