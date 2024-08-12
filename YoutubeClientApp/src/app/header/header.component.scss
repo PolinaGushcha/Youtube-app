@@ -4,7 +4,8 @@
 
   .container {
     display: flex;
-    justify-content: right;
+    flex-direction: column;
+    align-items: center;
   }
 
   .nav {
@@ -70,6 +71,22 @@
 
     .logout-button:hover {
       box-shadow: 0px 5px 30px 0px rgba(47, 128, 237, 1);
+    }
+  }
+
+  .nav-user-pages {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+
+    .user-page {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: rgba(47, 128, 237, 1);
+    }
+    .user-page:hover {
+      color: rgb(111, 174, 255);
     }
   }
 }

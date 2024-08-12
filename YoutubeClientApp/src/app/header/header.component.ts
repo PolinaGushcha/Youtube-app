@@ -25,9 +25,27 @@ export class HeaderComponent implements OnInit {
   public router = inject(Router);
   public loginData = this.loginService.getObject('authData')?.username || 'Your name';
 
+  //сортировка
+  public displaySortCpmponent?: boolean;
+  public upAndDownIsAvaliable?: boolean;
+  public upAndDownType = '';
+
   //делимся полученными данными и загрузкой
   @Output() shareData = new EventEmitter<IData[]>();
   @Output() shareIsLoading = new EventEmitter<boolean>();
+
+  @Output() shareSortType = new EventEmitter<string>();
+  handleSortType(value: string) {
+    this.upAndDownIsAvaliable = false;
+    this.upAndDownType = this.upAndDownType === value ? '' : value;
+    this.shareUpAndDownArrow.emit(this.upAndDownIsAvaliable);
+    this.shareSortType.emit(value);
+  }
+  @Output() shareUpAndDownArrow = new EventEmitter<boolean>();
+  reverseArrow() {
+    this.upAndDownIsAvaliable = !this.upAndDownIsAvaliable;
+    this.shareUpAndDownArrow.emit(this.upAndDownIsAvaliable);
+  }
 
   ngOnInit(): void {
     this.searchVideos();
@@ -68,25 +86,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  public displaySortCpmponent?: boolean;
-
-  public upAndDownIsAvaliable?: boolean;
-
-  public upAndDownType = '';
-
   toggleSortComponent() {
     this.displaySortCpmponent = !this.displaySortCpmponent;
   }
-  @Output() shareSortType = new EventEmitter<string>();
-  handleSortType(value: string) {
-    this.upAndDownIsAvaliable = false;
-    this.upAndDownType = this.upAndDownType === value ? '' : value;
-    this.shareUpAndDownArrow.emit(this.upAndDownIsAvaliable);
-    this.shareSortType.emit(value);
-  }
-  @Output() shareUpAndDownArrow = new EventEmitter<boolean>();
-  reverseArrow() {
-    this.upAndDownIsAvaliable = !this.upAndDownIsAvaliable;
-    this.shareUpAndDownArrow.emit(this.upAndDownIsAvaliable);
+
+  navigateToRoute(name?: string) {
+    this.router.navigateByUrl(name ? `layout/${name}` : `layout`);
   }
 }

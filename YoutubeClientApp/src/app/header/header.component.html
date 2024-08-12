@@ -20,6 +20,11 @@
         <button class="logout-button" (click)="logout()">logout</button>
       </div>
     </nav>
+    <aside class="nav-user-pages">
+      <button class="user-page" (click)="navigateToRoute()">all videos</button>
+      <button class="user-page" (click)="navigateToRoute('favorite')">favorite page</button>
+      <button class="user-page" (click)="navigateToRoute('create-card')">admin page</button>
+    </aside>
   </div>
 </header>
 

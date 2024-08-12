@@ -4,11 +4,13 @@
   (shareSortType)="getSortType($event)"
   (shareUpAndDownArrow)="getUpAndDownArrow($event)"></app-header>
 
-<div *ngIf="isLoading && showComponent">
+<div *ngIf="isLoading && (showItemComponent || showFavoriteComponent || showCreateCardComponent)">
   <h3>Loading</h3>
 </div>
 
-<section *ngIf="!isLoading && showComponent" class="search-results">
+<section
+  *ngIf="!isLoading && showItemComponent && !showFavoriteComponent && !showCreateCardComponent"
+  class="search-results">
   <div *ngFor="let card of data" class="card">
     <div class="card-container" [ngClass]="getColorClass(card.snippet.publishAt)">
       <img class="card-img" src="{{ card.snippet.thumbnails.medium.url }}" alt="{{ card.id.videoId }}" />
@@ -27,6 +29,7 @@
         </li>
       </ul>
       <h3 class="card-title">{{ card.snippet.title }}</h3>
+      <button (click)="addFavoriteCard(card)">like</button>
       <button (click)="navigateToRoute(card.id.videoId)" routerLinkActive="active" class="card-button">more...</button>
     </div>
   </div>
