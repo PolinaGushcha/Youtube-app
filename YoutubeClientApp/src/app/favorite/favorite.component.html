@@ -1,6 +1,9 @@
 <section class="search-results">
   <div *ngFor="let card of cards$ | async">
     <div class="card-container" [ngClass]="getColorClass(card.creationDate)">
+      <div *ngIf="card.id.length > 30">
+        <h2>My created card</h2>
+      </div>
       <img class="card-img" src="{{ card.imgLink }}" alt="{{ card.id }}" />
       <ul class="card-ul">
         <li class="card-li">
@@ -20,7 +23,13 @@
       <button (click)="removeCard(card.id)" class="likeBtn">
         <app-heart [isLiked]="card.isLiked" />
       </button>
-      <button (click)="navigateToRoute(card.id)" routerLinkActive="active" class="card-button">more...</button>
+      <button
+        *ngIf="card.id.length < 30"
+        (click)="navigateToRoute(card.id)"
+        routerLinkActive="active"
+        class="card-button">
+        more...
+      </button>
     </div>
   </div>
 </section>
