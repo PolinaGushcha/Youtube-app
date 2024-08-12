@@ -32,7 +32,7 @@ export class LayoutComponent implements OnInit {
   public sortType = '';
   public upAndDownIsAvaliable = false;
 
-  public itemsPerPage = 10;
+  public itemsPerPage = 20;
   public currentPage = 1;
 
   constructor(

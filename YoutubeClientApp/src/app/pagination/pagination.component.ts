@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class PaginationComponent {
   @Input() totalItems!: number;
-  @Input() itemsPerPage = 10;
+  @Input() itemsPerPage = 20;
   @Input() currentPage = 1;
 
   @Output() currentPageChange = new EventEmitter<number>();
