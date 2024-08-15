@@ -51,3 +51,44 @@ export interface IQuality {
   width: number;
   height: number;
 }
+
+export interface IResponseVideos {
+  etag: string;
+  items: IResponseItem[];
+  kind: string;
+  nextPageToken: string;
+  pageInfo: {
+    resultsPerPage: number;
+    totalResults: number;
+  };
+  regionCode: string;
+}
+
+export interface IResponseItem {
+  etag: string;
+  id: {
+    kind: string;
+    videoId: string;
+  };
+  kind: string;
+  snippet: {
+    publishAt: string;
+    publishTime: string;
+    channelId: string;
+    title: string;
+    description: string;
+    liveBroadcastContent: string;
+    channelTitle: string;
+    thumbnails: IThumbnails;
+  };
+}
+
+export interface IDetailsItem {
+  etag: string;
+  items: IData[] | ICard[];
+  kind: string;
+  pageInfo: {
+    resultsPerPage: number;
+    totalResults: number;
+  };
+}
