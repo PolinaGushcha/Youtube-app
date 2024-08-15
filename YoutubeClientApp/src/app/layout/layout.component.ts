@@ -28,7 +28,6 @@ export class LayoutComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.showComponent = !this.router.url.includes('item');
-        console.log(this.router.url.includes('item'));
       }
     });
   }

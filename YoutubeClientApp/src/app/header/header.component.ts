@@ -1,11 +1,11 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { ApiService } from '../api/api.service';
-import { IData } from '../types/response';
+import { IData, IResponseVideos } from '../types/response';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../auth/services/login.service';
 import { Router } from '@angular/router';
-import { forkJoin, map, mergeMap, of } from 'rxjs';
+import { forkJoin, map, mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -39,9 +39,10 @@ export class HeaderComponent implements OnInit {
     return this.apiService
       .getYoutubeApiVideos(value)
       .pipe(
-        mergeMap((firstObject: any) => {
-          const itemDetailsObservables = firstObject.items.map((item: any) => {
-            return this.apiService.getVideoStatistic(item.id.videoId).pipe(map((el: any) => ({ ...item, ...el })));
+        mergeMap(firstObject => {
+          const responseData = firstObject as IResponseVideos;
+          const itemDetailsObservables = responseData.items.map(item => {
+            return this.apiService.getVideoStatistic(item.id.videoId).pipe(map(el => ({ ...item, ...el })));
           });
           return forkJoin(itemDetailsObservables);
         })
@@ -49,7 +50,6 @@ export class HeaderComponent implements OnInit {
       .subscribe(response => {
         this.data = response as IData[];
         this.shareData.emit(this.data);
-        console.log(response);
         this.isLoading = false;
         this.shareIsLoading.emit(this.isLoading);
       });
