@@ -21,7 +21,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
   styleUrl: './layout.component.scss',
 })
 export class LayoutComponent implements OnInit {
-  public data?: IData[];
+  public data = signal<IData[]>([]);
   public isLoading = signal(false);
   public cards$: Observable<ICardObj[]>;
 
@@ -52,15 +52,23 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.cards$.subscribe(cards => {
-      this.data?.forEach(el => (el.isLiked = false));
+      this.data.update(arr => {
+        arr.forEach(el => (el.isLiked = false));
+        return arr;
+      });
       const arr: number[] = [];
       cards.forEach(({ id }) => {
-        const likesIndex: number | undefined = this.data?.findIndex(el => el.id.videoId === id);
-        if (likesIndex && this.data) {
+        const likesIndex: number | undefined = this.data().findIndex(el => el.id.videoId === id);
+        if (likesIndex) {
           arr.push(likesIndex);
         }
       });
-      arr.forEach(el => (this.data ? (this.data[el].isLiked = true) : el));
+      arr.forEach(el =>
+        this.data.update(i => {
+          i[el].isLiked = true;
+          return i;
+        })
+      );
     });
   }
 
@@ -69,7 +77,7 @@ export class LayoutComponent implements OnInit {
       el.isLiked = false;
       return el;
     });
-    this.data = receivedData;
+    this.data.set(receivedData);
   }
 
   getIsLoading(value: boolean) {
@@ -124,9 +132,10 @@ export class LayoutComponent implements OnInit {
 
   get paginatedItems() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    if (this.data) {
-      return this.data.slice(startIndex, startIndex + this.itemsPerPage);
-    } else return this.data;
+    if (this.data.length > 0) {
+      this.data.update(i => i.slice(startIndex, startIndex + this.itemsPerPage));
+      return this.data();
+    } else return this.data();
   }
 
   onPageChanged(page: number) {

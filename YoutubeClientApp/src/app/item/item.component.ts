@@ -19,8 +19,8 @@ export class ItemComponent implements OnInit {
   public borderService = inject(GetBorderColorService);
   public apiService = inject(ApiService);
 
-  public data?: IData;
-  public statistics?: IStatistic;
+  public data = signal<IData | undefined>(undefined);
+  public statistics = signal<IStatistic | undefined>(undefined);
 
   public isLoading = signal(false);
   public showComponent = signal(true);
@@ -40,13 +40,13 @@ export class ItemComponent implements OnInit {
     this.apiService.getYoutubeApiItem(this.activatedRouter.snapshot.params['id']).subscribe(buffer => {
       const responseBuffer = buffer as IDetailsItem;
       const responseItems = responseBuffer.items as IData[];
-      this.data = responseItems[0];
+      this.data.set(responseItems[0]);
       this.isLoading.set(false);
     });
     this.apiService.getVideoStatistic(this.activatedRouter.snapshot.params['id']).subscribe(buffer => {
       const responseBuffer = buffer as IDetailsItem;
       const responseItems = responseBuffer.items as ICard[];
-      this.statistics = responseItems[0].statistics as IStatistic;
+      this.statistics.set(responseItems[0].statistics);
       this.isLoading.set(false);
     });
   }
