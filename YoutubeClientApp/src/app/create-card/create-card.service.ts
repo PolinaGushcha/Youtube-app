@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { IForm } from '../types/form';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormStateService {
-  private formDataSubject = new BehaviorSubject<any>({});
+  private formDataSubject = new BehaviorSubject({});
   formData$ = this.formDataSubject.asObservable();
 
-  setFormData(data: any) {
+  setFormData(data: Partial<IForm>) {
     this.formDataSubject.next(data);
   }
 
