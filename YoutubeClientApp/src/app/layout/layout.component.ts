@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { ItemComponent } from '../item/item.component';
@@ -22,7 +22,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
 })
 export class LayoutComponent implements OnInit {
   public data?: IData[];
-  public isLoading = false;
+  public isLoading = signal(false);
   public cards$: Observable<ICardObj[]>;
 
   public showItemComponent = true;
@@ -73,7 +73,7 @@ export class LayoutComponent implements OnInit {
   }
 
   getIsLoading(value: boolean) {
-    this.isLoading = value;
+    this.isLoading.set(value);
   }
 
   getColorClass(date: string | undefined): string {

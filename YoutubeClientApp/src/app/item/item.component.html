@@ -1,8 +1,8 @@
-<div *ngIf="isLoading">
+<div *ngIf="isLoading()">
   <h3>Loading</h3>
 </div>
 
-<section *ngIf="!isLoading && showComponent" class="details-container">
+<section *ngIf="!isLoading() && showComponent()" class="details-container">
   <button (click)="goBack()" class="goBack-button">
     <img src="/back_button.svg" alt="back_button" />
   </button>

@@ -4,11 +4,11 @@
   (shareSortType)="getSortType($event)"
   (shareUpAndDownArrow)="getUpAndDownArrow($event)"></app-header>
 
-<div *ngIf="isLoading && (showItemComponent || showFavoriteComponent || showCreateCardComponent)">
+<div *ngIf="isLoading() && (showItemComponent || showFavoriteComponent || showCreateCardComponent)">
   <h3>Loading</h3>
 </div>
 
-<section *ngIf="!isLoading && showItemComponent && !showFavoriteComponent && !showCreateCardComponent">
+<section *ngIf="!isLoading() && showItemComponent && !showFavoriteComponent && !showCreateCardComponent">
   <div class="search-results">
     <div *ngFor="let card of paginatedItems" class="card">
       <div class="card-container" [ngClass]="getColorClass(card.snippet.publishAt)">
