@@ -1,11 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetBorderColorService } from '../layout/services/get-border-color.service';
 import { ApiService } from '../api/api.service';
-import { IData, IStatistic } from '../types/response';
+import { ICard, IData, IDetailsItem, IStatistic } from '../types/response';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { mergeMap, of } from 'rxjs';
 
 @Component({
   selector: 'app-item',
@@ -20,11 +19,11 @@ export class ItemComponent implements OnInit {
   public borderService = inject(GetBorderColorService);
   public apiService = inject(ApiService);
 
-  public data?: IData;
-  public statistics?: IStatistic;
+  public data = signal<IData | undefined>(undefined);
+  public statistics = signal<IStatistic | undefined>(undefined);
 
-  public isLoading = false;
-  public showComponent = true;
+  public isLoading = signal(false);
+  public showComponent = signal(true);
 
   constructor(private _location: Location) {}
 
@@ -37,14 +36,18 @@ export class ItemComponent implements OnInit {
   }
 
   getData() {
-    this.isLoading = true;
-    this.apiService.getYoutubeApiItem(this.activatedRouter.snapshot.params['id']).subscribe((buffer: any) => {
-      this.data = buffer.items[0] as IData;
-      this.isLoading = false;
+    this.isLoading.set(true);
+    this.apiService.getYoutubeApiItem(this.activatedRouter.snapshot.params['id']).subscribe(buffer => {
+      const responseBuffer = buffer as IDetailsItem;
+      const responseItems = responseBuffer.items as IData[];
+      this.data.set(responseItems[0]);
+      this.isLoading.set(false);
     });
-    this.apiService.getVideoStatistic(this.activatedRouter.snapshot.params['id']).subscribe((buffer: any) => {
-      this.statistics = buffer.items[0].statistics as IStatistic;
-      this.isLoading = false;
+    this.apiService.getVideoStatistic(this.activatedRouter.snapshot.params['id']).subscribe(buffer => {
+      const responseBuffer = buffer as IDetailsItem;
+      const responseItems = responseBuffer.items as ICard[];
+      this.statistics.set(responseItems[0].statistics);
+      this.isLoading.set(false);
     });
   }
 

@@ -64,7 +64,6 @@ export class CreateCardComponent implements OnInit, OnDestroy {
       },
       isLiked: true,
     };
-    console.log(newCard);
     this.store.dispatch(cardsListActions.addCard({ card: newCard }));
   }
 
