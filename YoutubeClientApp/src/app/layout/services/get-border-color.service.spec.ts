@@ -6,8 +6,9 @@ describe('GetBorderColorService', () => {
   let service: GetBorderColorService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(GetBorderColorService);
+    // service = new GetBorderColorService();
+    // TestBed.configureTestingModule({});
+    // service = TestBed.inject(GetBorderColorService);
   });
 
   it('should be created', () => {
