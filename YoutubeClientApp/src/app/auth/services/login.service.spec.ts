@@ -32,6 +32,10 @@ describe('LoginService', () => {
     // const localStorageSetItem = jest.spyOn(Storage.prototype, 'setItem');
   });
 
+  afterEach(() => {
+    jest.clearAllMocks(); // Clears mocks after each test
+  });
+
   it('should be created', () => {
     expect(LoginService).toBeTruthy();
   });
