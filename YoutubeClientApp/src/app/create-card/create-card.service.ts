@@ -6,7 +6,7 @@ import { IForm } from '../types/form';
   providedIn: 'root',
 })
 export class FormStateService {
-  private formDataSubject = new BehaviorSubject({});
+  public formDataSubject = new BehaviorSubject({});
   formData$ = this.formDataSubject.asObservable();
 
   setFormData(data: Partial<IForm>) {
