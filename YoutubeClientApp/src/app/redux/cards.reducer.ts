@@ -2,7 +2,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { cardsListActions } from './cards.actions';
 import { ICardObj } from './state.models';
 
-const initialState: ICardObj[] = [];
+export const initialState: ICardObj[] = [];
 
 export const cardsReducer = createFeature({
   name: 'cardsList',
