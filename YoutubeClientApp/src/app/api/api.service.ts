@@ -39,8 +39,8 @@ export class ApiService {
     return this.http.get(`${this.baseApiUrl}${ApiResourceEnum.search}`, options);
   }
 
-  getVideoStatistic(value: string) {
-    const urlParams = new HttpParams().set('part', ApiPartEnum.statistics).set('key', this.apiKey).set('id', value);
+  getVideoStatistic(id: string) {
+    const urlParams = new HttpParams().set('part', ApiPartEnum.statistics).set('key', this.apiKey).set('id', id);
     const options = { params: urlParams };
     return this.http.get(`${this.baseApiUrl}${ApiResourceEnum.videos}`, options);
   }
