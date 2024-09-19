@@ -56,17 +56,25 @@ describe('HTTPVideosService', () => {
   });
 
   describe('tests http getYoutubeApiItem(id)', () => {
-    it('shuld have correct params getYoutubeApiItem(id)', async () => {
+    it('shuld have correct params getYoutubeApiItem(id).subscribe()', async () => {
       const id = 'ID_string';
       const requestVideoUrl =
         'https://www.googleapis.com/youtube/v3/videos?part=snippet&key=AIzaSyB-sYrDcNSM42Dhm8HPyPt5qHpjmG9dkbM&id=ID_string';
       const videoResponse = [{ id: '1', videoName: 'foo' }];
-      const video$ = service.getYoutubeApiItem(id);
-      const videoPromise = firstValueFrom(video$);
+      // const video$ = service.getYoutubeApiItem(id);
+      // const videoPromise = firstValueFrom(video$);
+      // const req = http.expectOne(requestVideoUrl, 'check out getYoutubeApiItem() url');
+      // expect(req.request.method).toBe('GET');
+      // req.flush(videoResponse);
+      // expect(await videoPromise).toEqual(videoResponse);
+      let item: unknown | undefined;
+      service.getYoutubeApiItem(id).subscribe(response => {
+        item = response;
+      });
       const req = http.expectOne(requestVideoUrl, 'check out getYoutubeApiItem() url');
-      expect(req.request.method).toBe('GET');
+      expect(req.request.method).toEqual('GET');
       req.flush(videoResponse);
-      expect(await videoPromise).toEqual(videoResponse);
+      expect(item).toEqual(videoResponse);
     });
   });
 });
