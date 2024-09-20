@@ -1,6 +1,6 @@
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 
@@ -38,6 +38,30 @@ describe('HTTPVideosService', () => {
       req.flush(responseExample);
       expect(await videoPromise).toEqual(responseExample);
     });
+
+    it('throw an error if the getYoutubeApiVideos() request fail', () => {
+      let actualError: HttpErrorResponse | undefined;
+      service.getYoutubeApiVideos('Angular').subscribe({
+        next: () => {
+          fail('Success should not be called');
+        },
+        error: err => {
+          actualError = err;
+        },
+      });
+      const req = http.expectOne(
+        'https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyB-sYrDcNSM42Dhm8HPyPt5qHpjmG9dkbM&type=video&q=Angular&maxResults=30'
+      );
+      req.flush('Server error', {
+        status: 422,
+        statusText: 'Unprocessible error',
+      });
+      if (!actualError) {
+        throw new Error('Error should be defined');
+      }
+      expect(actualError?.status).toBe(422);
+      expect(actualError?.statusText).toBe('Unprocessible error');
+    });
   });
 
   describe('tests http getVideoStatistic(id) request', () => {
@@ -52,6 +76,31 @@ describe('HTTPVideosService', () => {
       expect(req.request.method).toEqual('GET');
       req.flush(responseExample);
       expect(await statePromise).toEqual(responseExample);
+    });
+
+    it('throw an error if the getVideoStatistic() request fail', () => {
+      let actualError: HttpErrorResponse | undefined;
+      service.getVideoStatistic('id').subscribe({
+        next: () => {
+          fail('Success should not be called');
+        },
+        error: err => {
+          actualError = err;
+        },
+      });
+      const req = http.expectOne(
+        'https://www.googleapis.com/youtube/v3/videos?part=statistics&key=AIzaSyB-sYrDcNSM42Dhm8HPyPt5qHpjmG9dkbM&id=id',
+        'Error of getVideoStatistic'
+      );
+      req.flush('Sserver error', {
+        status: 422,
+        statusText: 'Unprocessible entity',
+      });
+      if (!actualError) {
+        throw new Error('Error should be defined');
+      }
+      expect(actualError?.status).toBe(422);
+      expect(actualError?.statusText).toBe('Unprocessible entity');
     });
   });
 
@@ -74,7 +123,33 @@ describe('HTTPVideosService', () => {
       const req = http.expectOne(requestVideoUrl, 'check out getYoutubeApiItem() url');
       expect(req.request.method).toEqual('GET');
       req.flush(videoResponse);
-      expect(item).toEqual(videoResponse);
+      expect(item).toEqual([{ id: '1', videoName: 'foo' }]);
+      // expect(req.request.body).toEqual({body: name}); // When POST
+    });
+
+    it(' Error getYoutubeApiItem() request', () => {
+      let actualError: HttpErrorResponse | undefined;
+      service.getYoutubeApiItem('idItem').subscribe({
+        next: () => {
+          fail('Success should not be called');
+        },
+        error: err => {
+          actualError = err;
+        },
+      });
+      const req = http.expectOne(
+        'https://www.googleapis.com/youtube/v3/videos?part=snippet&key=AIzaSyB-sYrDcNSM42Dhm8HPyPt5qHpjmG9dkbM&id=idItem',
+        'Http url controll'
+      );
+      req.flush('Server error', {
+        status: 422,
+        statusText: 'Unprocessible entity',
+      });
+      if (!actualError) {
+        throw new Error('Error needs to be defined');
+      }
+      expect(actualError.status).toBe(422);
+      expect(actualError.statusText).toBe('Unprocessible entity');
     });
   });
 });
