@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './heart.component.scss',
 })
 export class HeartComponent {
-  @Input() isLiked?: boolean;
+  @Input() isLiked?: boolean = false;
 }
