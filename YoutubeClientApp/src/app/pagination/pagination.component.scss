@@ -14,11 +14,17 @@
   border: none;
   border-radius: 5px;
   color: white;
-  background-color: #2f80ed;
+  background-color: #1968df;
   padding: 10px 40px;
   cursor: pointer;
+  margin: 0 5px;
+  list-style: none;
+
+  &.active {
+    background-color: #0109ff;
+  }
 }
 .paginationBtn:disabled {
-  background-color: #8db0de;
+  background-color: #b3c6de;
   cursor: default;
 }
