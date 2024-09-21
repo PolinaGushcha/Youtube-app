@@ -9,11 +9,13 @@ import { first } from 'rxjs';
 describe('PaginationComponent test', () => {
   let component: PaginationComponent;
   let fixture: ComponentFixture<PaginationComponent>;
+  const mockUtilityService = [1, 2, 3, 4, 5];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [PaginationComponent],
-      providers: [UtilsService],
+      // providers: [UtilsService],
+      providers: [{ provide: UtilsService, useValue: mockUtilityService }],
     }).compileComponents();
 
     // const utilsService = Inject(UtilsService);
