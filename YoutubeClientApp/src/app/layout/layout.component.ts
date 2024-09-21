@@ -12,6 +12,7 @@ import { cardsListActions } from '../redux/cards.actions';
 import { HeartComponent } from '../assets/heart/heart.component';
 import { Observable } from 'rxjs';
 import { PaginationComponent } from '../pagination/pagination.component';
+import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-layout',
@@ -32,7 +33,8 @@ export class LayoutComponent implements OnInit {
   public sortType = '';
   public upAndDownIsAvaliable = false;
 
-  public itemsPerPage = 20;
+  public itemsPerPage = environment.ITEM_PER_PAGE;
+  public totalItems = environment.API_MAX_RESULT;
   public currentPage = 1;
 
   constructor(

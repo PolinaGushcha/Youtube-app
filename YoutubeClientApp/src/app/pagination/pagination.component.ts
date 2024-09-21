@@ -17,7 +17,7 @@ export class PaginationComponent implements OnInit {
   pagesCount = 1;
   pages: number[] = [];
 
-  @Output() currentPageChange = new EventEmitter<number>();
+  @Output() currentPageChangeEvent = new EventEmitter<number>();
   utilsService = inject(UtilsService);
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class PaginationComponent implements OnInit {
   }
 
   selectPage(page = 1): void {
-    this.currentPageChange.emit(page);
+    this.currentPageChangeEvent.emit(page);
   }
   /*
    ******************************
@@ -38,7 +38,7 @@ export class PaginationComponent implements OnInit {
   changePage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
-      this.currentPageChange.emit(this.currentPage);
+      this.currentPageChangeEvent.emit(this.currentPage);
     }
   }
 

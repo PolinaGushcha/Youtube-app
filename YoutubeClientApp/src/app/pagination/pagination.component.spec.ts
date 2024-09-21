@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaginationComponent } from './pagination.component';
 import { UtilsService } from './utils.service';
 import { By } from '@angular/platform-browser';
+import { first } from 'rxjs';
 
 describe('PaginationComponent test', () => {
   let component: PaginationComponent;
@@ -33,5 +34,18 @@ describe('PaginationComponent test', () => {
 
     expect(container.length).toBe(5);
     expect(container[0].nativeElement.textContent).toContain('1');
+  });
+
+  it('should emit number page', () => {
+    const container = fixture.debugElement.queryAll(By.css('[data-testid="page-container"]'));
+    let currentPage: number | undefined;
+
+    component.currentPageChangeEvent.pipe(first()).subscribe(page => {
+      currentPage = page;
+    });
+
+    container[0].triggerEventHandler('click');
+
+    expect(currentPage).toBe(1);
   });
 });
