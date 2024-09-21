@@ -3,16 +3,19 @@ import { TestBed } from '@angular/core/testing';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
+import { environment } from '../../environments/environment.development';
 
 describe('HTTPVideosService', () => {
   let service: ApiService;
   let http: HttpTestingController;
+  const maxResults = environment.API_MAX_RESULT;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       // imports: [HttpClientTestingModule],
       providers: [ApiService, provideHttpClient(), provideHttpClientTesting()],
     });
+
     service = TestBed.inject(ApiService);
     http = TestBed.inject(HttpTestingController);
   });
@@ -29,8 +32,7 @@ describe('HTTPVideosService', () => {
     it('shuld have correct params getYoutubeApiVideos("angular")', async () => {
       const searchString = 'angular';
       const responseExample = [{ id: '1', name: 'foo' }];
-      const url =
-        'https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyB-sYrDcNSM42Dhm8HPyPt5qHpjmG9dkbM&type=video&q=angular&maxResults=30';
+      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyB-sYrDcNSM42Dhm8HPyPt5qHpjmG9dkbM&type=video&q=angular&maxResults=${maxResults}`;
       const vedeo$ = service.getYoutubeApiVideos(searchString);
       const videoPromise = firstValueFrom(vedeo$);
       const req = http.expectOne(url, 'Http video mock');
@@ -50,7 +52,7 @@ describe('HTTPVideosService', () => {
         },
       });
       const req = http.expectOne(
-        'https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyB-sYrDcNSM42Dhm8HPyPt5qHpjmG9dkbM&type=video&q=Angular&maxResults=30'
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyB-sYrDcNSM42Dhm8HPyPt5qHpjmG9dkbM&type=video&q=Angular&maxResults=${maxResults}`
       );
       req.flush('Server error', {
         status: 422,

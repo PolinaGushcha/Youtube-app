@@ -26,7 +26,8 @@ export class ApiService {
   public apiType = 'video';
   public apiQ = '';
   public apiId = '';
-  public apiMaxResults = 30;
+  // public apiMaxResults = 30;
+  public apiMaxResults = environment.API_MAX_RESULT;
 
   getYoutubeApiVideos(value?: string) {
     const urlParams = new HttpParams()
