@@ -2,7 +2,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { cardsListActions } from './cards.actions';
 import { ICardObj } from './state.models';
 
-const initialState: ICardObj[] = [];
+export const initialState: ICardObj[] = [];
 
 export const cardsReducer = createFeature({
   name: 'cardsList',
@@ -10,8 +10,9 @@ export const cardsReducer = createFeature({
     initialState,
     on(cardsListActions.addCard, (state, { card }) => [...state, card]),
     on(cardsListActions.deleteCard, (state, { id }) => [...state.filter(el => el.id !== id)]),
-    on(cardsListActions.loadCard, state => ({
-      ...state,
-    }))
+    // on(cardsListActions.loadCard, state => ({
+    //   ...state,
+    // }))
+    on(cardsListActions.loadCard, state => [...state])
   ),
 });
