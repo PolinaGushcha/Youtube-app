@@ -1,8 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { FormStateService } from './create-card.service';
 
-describe('Create-card test', () => {
+describe('CreateCardComponent', () => {
   let service: FormStateService;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
@@ -10,12 +11,13 @@ describe('Create-card test', () => {
     });
     service = TestBed.inject(FormStateService);
   });
-  it('shuld be created', () => {
+
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('shold test the setFormData and getFormData', () => {
-    const initialFormData = { title: 'John', description: 'John description' };
+  it('should test the setFormData and getFormData', () => {
+    const initialFormData = { title: 'John', description: 'John description' }; // почему тут только так мало данных
     service.setFormData(initialFormData);
     expect(service.getFormData()).toEqual(initialFormData);
   });

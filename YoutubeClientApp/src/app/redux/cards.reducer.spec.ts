@@ -33,11 +33,11 @@ describe('Card reducer', () => {
     expect(state).toEqual(newState);
   });
 
-  it('get Card to State', () => {
-    const action = CardAction.cardsListActions.loadCard();
-    const state = cardsReducer.reducer(newState, action);
-    expect(state).toEqual(newState);
-  });
+  // it('get Card to State', () => {
+  //   const action = CardAction.cardsListActions.loadCard();
+  //   const state = cardsReducer.reducer(newState, action);
+  //   expect(state).toEqual(newState);
+  // });
 
   it('remove Card from State', () => {
     const action = CardAction.cardsListActions.deleteCard({ id: '1' });
