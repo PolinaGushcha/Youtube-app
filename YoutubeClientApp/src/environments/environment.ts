@@ -4,3 +4,13 @@ export const environment = {
   API_MAX_RESULT: 32,
   ITEM_PER_PAGE: 8,
 };
+
+export enum ApiPartEnum {
+  snippet = 'snippet',
+  statistics = 'statistics',
+}
+
+export enum ApiResourceEnum {
+  search = 'search',
+  videos = 'videos',
+}

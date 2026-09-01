@@ -12,7 +12,6 @@ import { cardsListActions } from '../redux/cards.actions';
 import { HeartComponent } from '../assets/heart/heart.component';
 import { Observable } from 'rxjs';
 import { PaginationComponent } from '../pagination/pagination.component';
-import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-layout',
@@ -32,9 +31,9 @@ export class LayoutComponent implements OnInit {
 
   public sortType = '';
   public upAndDownIsAvaliable = false;
+  public sortText = '';
 
-  public itemsPerPage = environment.ITEM_PER_PAGE;
-  public totalItems = environment.API_MAX_RESULT;
+  public itemsPerPage = 20;
   public currentPage = 1;
 
   constructor(
@@ -60,8 +59,8 @@ export class LayoutComponent implements OnInit {
       });
       const arr: number[] = [];
       cards.forEach(({ id }) => {
-        const likesIndex: number | undefined = this.data().findIndex(el => el.id.videoId === id);
-        if (likesIndex) {
+        const likesIndex: number = this.data().findIndex(el => el.id.videoId === id);
+        if (likesIndex !== -1) {
           arr.push(likesIndex);
         }
       });
@@ -102,6 +101,10 @@ export class LayoutComponent implements OnInit {
     this.upAndDownIsAvaliable = value;
   }
 
+  getSortText(text: string) {
+    this.sortText = text;
+  }
+
   addOrRemoveFavoriteCard(card: IData) {
     if (card.isLiked) {
       this.removeCard(card.id.videoId);
@@ -117,7 +120,7 @@ export class LayoutComponent implements OnInit {
       description: card.snippet.description,
       imgLink: card.snippet.thumbnails.medium.url,
       videoLink: 'video-link',
-      creationDate: card.snippet.publishAt,
+      creationDate: card.snippet.publishedAt,
       statistics: {
         viewCount: card.items[0].statistics?.viewCount || '0',
         likeCount: card.items[0].statistics?.likeCount || '0',
@@ -132,12 +135,37 @@ export class LayoutComponent implements OnInit {
     this.store.dispatch(cardsListActions.deleteCard({ id }));
   }
 
-  get paginatedItems() {
+  private compareItems(a: IData, b: IData): number {
+    let result = 0;
+    if (this.sortType === 'date') {
+      result = new Date(a.snippet.publishedAt).getTime() - new Date(b.snippet.publishedAt).getTime();
+    } else if (this.sortType === 'countOfViews') {
+      result = Number(a.items[0].statistics?.viewCount || 0) - Number(b.items[0].statistics?.viewCount || 0);
+    }
+    return this.upAndDownIsAvaliable ? -result : result;
+  }
+
+  get sortedItems(): IData[] {
+    const items = [...this.data()];
+
+    if (this.sortType === 'byWordOrSentance') {
+      const text = this.sortText.trim().toLowerCase();
+      if (!text) return items;
+      return items.filter(
+        el => el.snippet.title.toLowerCase().includes(text) || el.snippet.description.toLowerCase().includes(text)
+      );
+    }
+
+    if (this.sortType === 'date' || this.sortType === 'countOfViews') {
+      return items.sort((a, b) => this.compareItems(a, b));
+    }
+
+    return items;
+  }
+
+  get paginatedItems(): IData[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    if (this.data.length > 0) {
-      this.data.update(i => i.slice(startIndex, startIndex + this.itemsPerPage));
-      return this.data();
-    } else return this.data();
+    return this.sortedItems.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
   onPageChanged(page: number) {
