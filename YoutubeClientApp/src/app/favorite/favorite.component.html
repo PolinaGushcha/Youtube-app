@@ -1,0 +1,29 @@
+<section class="search-results">
+  <div *ngFor="let card of cards$ | async">
+    <div class="card-container" [ngClass]="getColorClass(card.creationDate)">
+      <div class="card-thumb" (click)="card.id.length < 30 && navigateToRoute(card.id)">
+        <img class="card-img" src="{{ card.imgLink }}" alt="{{ card.id }}" />
+        <button (click)="removeCard(card.id); $event.stopPropagation()" class="likeBtn">
+          <app-heart [isLiked]="card.isLiked" />
+        </button>
+        <button *ngIf="card.id.length < 30" (click)="navigateToRoute(card.id)" class="card-button">Watch</button>
+      </div>
+      <div *ngIf="card.id.length > 30" class="own-card-badge">My created card</div>
+      <h3 class="card-title" (click)="card.id.length < 30 && navigateToRoute(card.id)">{{ card.title }}</h3>
+      <ul class="card-ul">
+        <li class="card-li">
+          <img src="/viewed.svg" alt="viewed" />
+          <p class="card-text">{{ card.statistics.viewCount }}</p>
+        </li>
+        <li class="card-li">
+          <img src="/liked.svg" alt="liked" />
+          <p class="card-text">{{ card.statistics.likeCount }}</p>
+        </li>
+        <li class="card-li">
+          <img src="/comments.svg" alt="comments" />
+          <p class="card-text">{{ card.statistics.commentCount }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

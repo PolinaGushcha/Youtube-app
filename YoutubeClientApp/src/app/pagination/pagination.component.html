@@ -1,0 +1,25 @@
+<!-- <div class="pagination">
+  <button (click)="previousPage()" [disabled]="currentPage === 1" class="paginationBtn">Previous</button>
+  <p class="currentPage">Page {{ currentPage }} of {{ totalPages }}</p>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="paginationBtn">Next</button>
+</div> -->
+<div class="pagination">
+  <button (click)="previousPage()" [disabled]="currentPage === 1" class="paginationBtn">Previous</button>
+  <p class="currentPage">Page {{ currentPage }} of {{ totalPages }}</p>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="paginationBtn">Next</button>
+</div>
+
+<ul class="pagination">
+  <li
+    *ngFor="let page of pages"
+    data-testid="page-container"
+    class="paginationBtn"
+    [ngClass]="{ active: currentPage === page }"
+    (click)="selectPage(page)"
+    tabindex="0"
+    (keyup.enter)="selectPage(page)">
+    <span class="page-link">
+      {{ page }}
+    </span>
+  </li>
+</ul>
