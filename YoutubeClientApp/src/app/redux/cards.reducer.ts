@@ -10,9 +10,8 @@ export const cardsReducer = createFeature({
     initialState,
     on(cardsListActions.addCard, (state, { card }) => [...state, card]),
     on(cardsListActions.deleteCard, (state, { id }) => [...state.filter(el => el.id !== id)]),
-    // on(cardsListActions.loadCard, state => ({
-    //   ...state,
-    // }))
-    on(cardsListActions.loadCard, state => [...state])
+    on(cardsListActions.loadCard, state => ({
+      ...state,
+    }))
   ),
 });

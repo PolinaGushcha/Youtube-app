@@ -11,7 +11,7 @@ export interface IData {
     totalResults: number;
   };
   snippet: {
-    publishAt: string;
+    publishedAt: string;
     publishTime: string;
     channelId: string;
     title: string;
@@ -72,7 +72,7 @@ export interface IResponseItem {
   };
   kind: string;
   snippet: {
-    publishAt: string;
+    publishedAt: string;
     publishTime: string;
     channelId: string;
     title: string;
