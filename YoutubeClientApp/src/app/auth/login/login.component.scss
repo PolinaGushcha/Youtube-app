@@ -1,0 +1,111 @@
+:host {
+  display: block;
+}
+
+@media (max-width: 400px) {
+  :host {
+    padding: 0 16px;
+  }
+}
+
+.form {
+  background: var(--yt-surface);
+  border: 1px solid var(--yt-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  max-width: 344px;
+  width: 100%;
+  padding: 32px 24px 26px;
+  margin: 60px auto 0;
+
+  .form-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 16px;
+  }
+
+  .form-label {
+    display: grid;
+    gap: 6px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+
+    .form-input {
+      color: var(--text-primary);
+      background: var(--yt-surface);
+      border: 1px solid var(--yt-gray-3);
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      width: 100%;
+      font-size: 13px;
+      transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+    }
+    .form-input:focus-visible {
+      outline: none;
+      border-color: #1c62b9;
+      box-shadow: inset 0 0 0 1px #1c62b9;
+    }
+    .form-input-error {
+      outline: none;
+      border-color: var(--danger);
+      box-shadow: inset 0 0 0 1px var(--danger);
+    }
+
+    small {
+      color: var(--danger);
+      text-transform: none;
+      font-weight: 400;
+    }
+  }
+
+  .form-label:nth-child(3) {
+    margin-top: 5px;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 22px;
+
+    .form-link {
+      color: var(--text-secondary);
+      font-weight: 500;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+
+    .form-button {
+      background: var(--yt-red);
+      border-radius: var(--radius-pill);
+      padding: 9px 32px;
+      color: white;
+      border: none;
+      margin-left: 18px;
+      cursor: pointer;
+      font-weight: 500;
+      transition:
+        background 0.15s ease,
+        transform 0.1s ease;
+    }
+    .form-button:hover {
+      background: var(--yt-red-dark);
+    }
+    .form-button:active {
+      background: #a30000;
+      transform: scale(0.96);
+    }
+  }
+}
