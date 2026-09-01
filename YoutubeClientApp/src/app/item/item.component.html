@@ -3,16 +3,18 @@
 </div>
 
 <section *ngIf="!isLoading() && showComponent()" class="details-container">
-  <button (click)="goBack()" class="goBack-button">
-    <img src="/back_button.svg" alt="back_button" />
+  <button (click)="goBack()" class="goBack-button" aria-label="Go back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
   </button>
   <div class="details">
     <img class="details-image" src="{{ data()?.snippet?.thumbnails?.high?.url }}" alt="{{ data()?.snippet?.title }}" />
-    <div class="details-info" [ngClass]="getColorClass(data()?.snippet?.publishAt)">
+    <div class="details-info" [ngClass]="getColorClass(data()?.snippet?.publishedAt)">
       <div>
         <div class="info-title">
           <h2 class="info-h2">{{ data()?.snippet?.title }}</h2>
-          <span class="info-publishedAt">{{ data()?.snippet?.publishAt | date: 'full' }}</span>
+          <span class="info-publishedAt">{{ data()?.snippet?.publishedAt | date: 'full' }}</span>
         </div>
         <div class="description">
           <h3 class="description-title">Description:</h3>
