@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "types": ["jest"],
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitAny": true,
@@ -20,10 +21,12 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"]
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
   },
   "include": ["src/**/*.ts"],
-  // "exclude": ["src/test.ts", "src/**/*.spec.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
