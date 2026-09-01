@@ -1,30 +1,38 @@
 <header class="header">
   <div class="container">
     <nav class="nav">
+      <img src="/logo.svg" alt="Logo" class="logo" (click)="reloadApp()" />
       <div class="search-container">
-        <img src="/logo.svg" alt="Logo" />
         <div class="search-bar">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
           <input
             class="search-input"
             type="text"
-            placeholder="What are you want to find out?"
+            placeholder="Search"
             (input)="onInputChange($event)" />
         </div>
-        <button class="settings-button" (click)="toggleSortComponent()">
-          <img src="/sort.svg" alt="Settings" />
+        <button class="settings-button" (click)="toggleSortComponent()" aria-label="Filters">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M8 12h12M11 18h9" />
+            <circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none" />
+            <circle cx="8" cy="18" r="1.6" fill="currentColor" stroke="none" />
+          </svg>
         </button>
       </div>
       <div class="user-info">
-        <p>{{ loginData }}</p>
-        <img src="/user.svg" alt="User Icon" class="user-icon" />
-        <button class="logout-button" (click)="logout()">logout</button>
+        <p class="user-name">{{ loginData }}</p>
+        <span class="user-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="3.6" />
+            <path d="M4.5 20c0.8-4 4-6.2 7.5-6.2s6.7 2.2 7.5 6.2" />
+          </svg>
+        </span>
+        <button class="logout-button" (click)="logout()">Sign out</button>
       </div>
     </nav>
-    <aside class="nav-user-pages">
-      <button class="user-page" (click)="navigateToRoute()">all videos</button>
-      <button class="user-page" (click)="navigateToRoute('favorite')">favorite page</button>
-      <button class="user-page" (click)="navigateToRoute('create-card')">admin page</button>
-    </aside>
   </div>
 </header>
 
@@ -32,39 +40,60 @@
   <section class="aside">
     <div class="container">
       <div class="section">
-        <p class="sort-text">Sorting by:</p>
+        <p class="sort-text">Sort by</p>
         <div class="sort-list">
-          <button [ngStyle]="{ color: upAndDownType === 'date' ? 'red' : '#2F80ED' }" (click)="handleSortType('date')">
-            date
+          <button
+            class="chip"
+            [class.chip-active]="upAndDownType === 'date'"
+            (click)="handleSortType('date')">
+            Date
           </button>
           <button
-            [ngStyle]="{ color: upAndDownType === 'date' ? 'red' : '#2F80ED' }"
+            class="chip chip-icon"
             (click)="reverseArrow()"
-            *ngIf="upAndDownType === 'date'">
-            <img
+            *ngIf="upAndDownType === 'date'"
+            aria-label="Reverse order">
+            <svg
               [ngClass]="{ arrow: !upAndDownIsAvaliable, arrowUp: upAndDownIsAvaliable }"
-              src="/arrow.svg"
-              alt="arrow" />
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 19V5M5 12l7-7 7 7" />
+            </svg>
           </button>
           <button
-            [ngStyle]="{ color: upAndDownType === 'countOfViews' ? 'red' : '#2F80ED' }"
+            class="chip"
+            [class.chip-active]="upAndDownType === 'countOfViews'"
             (click)="handleSortType('countOfViews')">
-            count of views
-          </button>
-          <button (click)="reverseArrow()" *ngIf="upAndDownType === 'countOfViews'">
-            <img
-              [ngClass]="{ arrow: !upAndDownIsAvaliable, arrowUp: upAndDownIsAvaliable }"
-              class="arrow"
-              src="/arrow.svg"
-              alt="arrow" />
+            View count
           </button>
           <button
-            [ngStyle]="{ color: upAndDownType === 'byWordOrSentance' ? 'red' : '#2F80ED' }"
+            class="chip chip-icon"
+            (click)="reverseArrow()"
+            *ngIf="upAndDownType === 'countOfViews'"
+            aria-label="Reverse order">
+            <svg
+              [ngClass]="{ arrow: !upAndDownIsAvaliable, arrowUp: upAndDownIsAvaliable }"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 19V5M5 12l7-7 7 7" />
+            </svg>
+          </button>
+          <button
+            class="chip"
+            [class.chip-active]="upAndDownType === 'byWordOrSentance'"
             (click)="handleSortType('byWordOrSentance')">
-            by word or sentance
+            Keyword
           </button>
         </div>
-        <input class="sort-input" type="text" name="" id="" />
+        <input class="sort-input" type="text" placeholder="Type to filter…" (input)="onSortTextChange($event)" />
       </div>
     </div>
   </section>

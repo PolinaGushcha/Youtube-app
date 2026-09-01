@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../auth/services/login.service';
 import { Router } from '@angular/router';
-import { forkJoin, map, mergeMap } from 'rxjs';
+import { defaultIfEmpty, forkJoin, map, mergeMap } from 'rxjs';
 // import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -48,6 +48,12 @@ export class HeaderComponent implements OnInit {
     this.shareUpAndDownArrow.emit(this.upAndDownIsAvaliable);
   }
 
+  @Output() shareSortText = new EventEmitter<string>();
+  onSortTextChange(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.shareSortText.emit(value);
+  }
+
   ngOnInit(): void {
     this.searchVideos();
   }
@@ -63,15 +69,22 @@ export class HeaderComponent implements OnInit {
           const itemDetailsObservables = responseData.items.map(item => {
             return this.apiService.getVideoStatistic(item.id.videoId).pipe(map(el => ({ ...item, ...el })));
           });
-          return forkJoin(itemDetailsObservables);
+          return forkJoin(itemDetailsObservables).pipe(defaultIfEmpty([] as IData[]));
         })
       )
-      .subscribe(response => {
-        // this.data = response as IData[];
-        this.data.set(response as IData[]);
-        this.shareData.emit(this.data());
-        this.isLoading.set(false);
-        this.shareIsLoading.emit(this.isLoading());
+      .subscribe({
+        next: response => {
+          // this.data = response as IData[];
+          this.data.set(response as IData[]);
+          this.shareData.emit(this.data());
+          this.isLoading.set(false);
+          this.shareIsLoading.emit(this.isLoading());
+        },
+        error: err => {
+          console.error('Failed to load videos', err);
+          this.isLoading.set(false);
+          this.shareIsLoading.emit(this.isLoading());
+        },
       });
   }
 
@@ -94,5 +107,9 @@ export class HeaderComponent implements OnInit {
 
   navigateToRoute(name?: string) {
     this.router.navigateByUrl(name ? `layout/${name}` : `layout`);
+  }
+
+  reloadApp() {
+    window.location.href = '/layout';
   }
 }
