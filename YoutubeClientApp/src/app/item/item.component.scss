@@ -1,54 +1,114 @@
 .details-container {
   display: flex;
   height: 460px;
-  margin: 0 auto;
-  max-width: 1197px;
-  padding-top: 44px;
+  padding: 24px;
+
+  @media (max-width: 900px) {
+    height: auto;
+    flex-direction: column;
+    padding: 16px;
+  }
 
   .goBack-button {
-    border: none;
-    background-color: transparent;
+    border: 1px solid var(--yt-gray-3);
+    background: var(--yt-surface);
+    border-radius: var(--radius-pill);
     height: fit-content;
     width: fit-content;
-    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
     cursor: pointer;
+    margin-right: 16px;
+    color: var(--text-primary);
+    transition:
+      background 0.15s ease,
+      transform 0.1s ease;
+
+    @media (max-width: 900px) {
+      margin-right: 0;
+      margin-bottom: 12px;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:hover {
+      background: var(--yt-gray-1);
+    }
+
+    &:active {
+      transform: scale(0.92);
+    }
   }
 
   .details {
     display: flex;
     align-items: flex-start;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+    }
 
     .details-image {
       height: 100%;
-      border-radius: 0px 0px 0px 5px;
+      object-fit: cover;
+
+      @media (max-width: 900px) {
+        width: 100%;
+        height: auto;
+        max-height: 280px;
+      }
     }
   }
 
   .details-info {
-    background-color: #e5e5e5;
+    background: var(--yt-surface);
+    border-left: 4px solid transparent;
     padding: 35px 37px 0px;
     height: 100%;
+
+    @media (max-width: 900px) {
+      padding: 20px 20px 24px;
+      height: auto;
+      width: 100%;
+    }
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-bottom-width: 5px;
-    border-bottom-style: solid;
-    border-radius: 0 5px 5px 0;
 
     .info-title {
       display: flex;
       justify-content: space-between;
       align-items: center;
 
+      @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
       .info-h2 {
-        font-size: 24px;
-        font-weight: bold;
+        font-size: 22px;
+        font-weight: 700;
         width: 70%;
         margin: 0 0;
+        color: var(--text-primary);
+
+        @media (max-width: 600px) {
+          width: 100%;
+          font-size: 18px;
+        }
       }
 
       .info-publishedAt {
-        color: #828282;
+        color: var(--text-muted);
         font-size: 10px;
       }
     }
@@ -56,13 +116,14 @@
     .description {
       .description-title {
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 600;
         margin: 30px 0px 5px;
+        color: var(--text-primary);
       }
 
       .description-text {
         font-size: 12px;
-        color: #828282;
+        color: var(--text-secondary);
         margin: 0 0;
         max-height: 140px;
         overflow-y: auto;
@@ -74,18 +135,30 @@
       display: flex;
       justify-content: center;
 
+      @media (max-width: 600px) {
+        padding: 20px 0 0;
+      }
+
       .card-ul {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 10px;
+        padding: 10px 18px;
         margin: 0 0;
-        max-width: 223px;
+        max-width: 260px;
         width: 100%;
+        gap: 6px;
+        background: var(--yt-gray-1);
+        border-radius: var(--radius-pill);
+
+        @media (max-width: 600px) {
+          max-width: 100%;
+        }
 
         .card-li {
           text-decoration: none;
           display: flex;
+          color: var(--text-secondary);
 
           .card-text {
             font-size: 10px;
@@ -98,14 +171,14 @@
 }
 
 .color-blue {
-  border-color: #2f80ed;
+  border-left-color: #3ea6ff;
 }
 .color-green {
-  border-color: #27ae60;
+  border-left-color: #2ba640;
 }
 .color-yellow {
-  border-color: #f2c94c;
+  border-left-color: #f0b400;
 }
 .color-red {
-  border-color: #eb5757;
+  border-left-color: var(--yt-red);
 }
