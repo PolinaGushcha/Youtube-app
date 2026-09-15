@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withInMemoryScrolling } from '@angular/router';
+import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
 
 import { appRoutes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
@@ -15,7 +15,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
       [...appRoutes, ...layoutRoutes],
-      withInMemoryScrolling({ scrollPositionRestoration: 'top' })
+      withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
+      withHashLocation()
     ),
     provideStore({ cardState: cardsReducer.reducer }),
     provideEffects([CardEffects]),
